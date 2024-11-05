@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subregions",
+  "info": {
+    "singularName": "subregion",
+    "pluralName": "subregions",
+    "displayName": "Subregión"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_evento_sp_soportes",
+  "info": {
+    "displayName": "soporte",
+    "icon": "attachment"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "archivos": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

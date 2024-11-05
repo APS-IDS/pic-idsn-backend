@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "municipios",
+  "info": {
+    "singularName": "municipio",
+    "pluralName": "municipios",
+    "displayName": "Municipio"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

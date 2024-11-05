@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_evento_sp_actividads",
+  "info": {
+    "displayName": "Actividad",
+    "icon": "briefcase",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "descripcion": {
+      "type": "text",
+      "required": true
+    },
+    "cantidad_a_ejecutar": {
+      "required": true,
+      "type": "integer",
+      "max": 100,
+      "min": 0
+    },
+    "tecnologia": {
+      "type": "enumeration",
+      "enum": [
+        "Información en salud",
+        "Caracterización social y ambiental en entornos de vida cotidiana",
+        "Educación en salud"
+      ],
+      "required": true
+    },
+    "soportes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.soporte"
+    }
+  }
+}
