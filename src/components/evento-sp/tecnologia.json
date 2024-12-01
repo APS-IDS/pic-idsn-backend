@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_evento_sp_tecnologias",
+  "info": {
+    "displayName": "Tecnologia",
+    "icon": "cloud"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}

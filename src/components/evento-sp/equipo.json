@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_evento_sp_equipos",
+  "info": {
+    "displayName": "Equipo",
+    "icon": "archive"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}

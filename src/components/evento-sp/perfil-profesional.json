@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_evento_sp_perfil_profesionals",
+  "info": {
+    "displayName": "Perfil profesional",
+    "icon": "database"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}

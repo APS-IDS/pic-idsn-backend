@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_evento_sp_entornos",
+  "info": {
+    "displayName": "Entorno",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}

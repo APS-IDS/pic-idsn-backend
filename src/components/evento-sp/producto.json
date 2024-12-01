@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_evento_sp_productos",
+  "info": {
+    "displayName": "Producto",
+    "icon": "calendar",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "descripcion": {
+      "type": "text"
+    },
+    "indicador": {
+      "type": "text"
+    },
+    "indicador_linea_base": {
+      "type": "text"
+    },
+    "actividades": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.actividad"
+    }
+  }
+}

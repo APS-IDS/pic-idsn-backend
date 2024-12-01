@@ -2,34 +2,70 @@
   "collectionName": "components_evento_sp_actividads",
   "info": {
     "displayName": "Actividad",
-    "icon": "briefcase",
-    "description": ""
+    "icon": "walk"
   },
   "options": {},
   "attributes": {
     "descripcion": {
-      "type": "text",
-      "required": true
+      "type": "text"
     },
     "cantidad_a_ejecutar": {
-      "required": true,
-      "type": "integer",
-      "max": 100,
-      "min": 0
+      "type": "string"
     },
-    "tecnologia": {
-      "type": "enumeration",
-      "enum": [
-        "Información en salud",
-        "Caracterización social y ambiental en entornos de vida cotidiana",
-        "Educación en salud"
-      ],
-      "required": true
+    "unidad_medida": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.unidad-medida"
+    },
+    "entornos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.entorno"
+    },
+    "tecnologias": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.tecnologia"
+    },
+    "poblaciones": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.poblacion-sujeto"
     },
     "soportes": {
       "type": "component",
       "repeatable": true,
       "component": "evento-sp.soporte"
+    },
+    "equipos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.equipo"
+    },
+    "perfiles_profesionales": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.perfil-profesional"
+    },
+    "cups": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.cups"
+    },
+    "valor_unitario": {
+      "type": "decimal"
+    },
+    "valor_total": {
+      "type": "decimal"
+    },
+    "Observaciones": {
+      "type": "text"
+    },
+    "porcentaje_cumplimiento": {
+      "type": "decimal"
+    },
+    "observaciones_seguimiento": {
+      "type": "text"
     }
   }
 }

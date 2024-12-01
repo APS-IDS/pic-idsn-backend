@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "planeacions",
+  "info": {
+    "singularName": "planeacion",
+    "pluralName": "planeacions",
+    "displayName": "Planeacion",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "territorializacion": {
+      "type": "component",
+      "repeatable": false,
+      "component": "evento-sp.territorializacion"
+    },
+    "Evento": {
+      "type": "text"
+    },
+    "metas_indicadores": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.metas-indicadores"
+    },
+    "ejes_estrategicos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.eje-estrategico"
+    },
+    "lineas_operativas": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.linea-operativa"
+    },
+    "productos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.producto"
+    }
+  }
+}

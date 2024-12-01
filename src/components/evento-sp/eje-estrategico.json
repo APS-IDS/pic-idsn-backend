@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_evento_sp_eje_estrategicos",
+  "info": {
+    "displayName": "Eje Estrategico",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}

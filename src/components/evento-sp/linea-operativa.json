@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_evento_sp_linea_operativas",
+  "info": {
+    "displayName": "Linea operativa",
+    "icon": "collapse"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}

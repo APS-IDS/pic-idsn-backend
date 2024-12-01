@@ -1,13 +1,16 @@
 {
   "collectionName": "components_evento_sp_soportes",
   "info": {
-    "displayName": "soporte",
+    "displayName": "Soporte",
     "icon": "attachment"
   },
   "options": {},
   "attributes": {
-    "nombre": {
+    "tipo": {
       "type": "string"
+    },
+    "descripcion": {
+      "type": "text"
     },
     "archivos": {
       "allowedTypes": [
@@ -18,6 +21,9 @@
       ],
       "type": "media",
       "multiple": true
+    },
+    "valor_porcentual": {
+      "type": "decimal"
     }
   }
 }

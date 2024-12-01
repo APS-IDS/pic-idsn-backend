@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_evento_sp_cups",
+  "info": {
+    "displayName": "CUPS",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "codigo": {
+      "type": "string"
+    },
+    "sub_codigo": {
+      "type": "string"
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "valor": {
+      "type": "decimal"
+    }
+  }
+}

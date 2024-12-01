@@ -495,45 +495,6 @@ export interface PluginUsersPermissionsUser
   };
 }
 
-export interface ApiAnexoTecnicoAnexoTecnico
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'anexo_tecnicos';
-  info: {
-    singularName: 'anexo-tecnico';
-    pluralName: 'anexo-tecnicos';
-    displayName: 'Anexo t\u00E9cnico';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    municipio: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::municipio.municipio'
-    >;
-    subregion: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::subregion.subregion'
-    >;
-    Evento: Schema.Attribute.Component<'evento-sp.evento', true> &
-      Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::anexo-tecnico.anexo-tecnico'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
   collectionName: 'municipios';
   info: {
@@ -557,6 +518,52 @@ export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::municipio.municipio'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPlaneacionPlaneacion extends Struct.CollectionTypeSchema {
+  collectionName: 'planeacions';
+  info: {
+    singularName: 'planeacion';
+    pluralName: 'planeacions';
+    displayName: 'Planeacion';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    territorializacion: Schema.Attribute.Component<
+      'evento-sp.territorializacion',
+      false
+    >;
+    Evento: Schema.Attribute.Text;
+    metas_indicadores: Schema.Attribute.Component<
+      'evento-sp.metas-indicadores',
+      true
+    >;
+    ejes_estrategicos: Schema.Attribute.Component<
+      'evento-sp.eje-estrategico',
+      true
+    >;
+    lineas_operativas: Schema.Attribute.Component<
+      'evento-sp.linea-operativa',
+      true
+    >;
+    productos: Schema.Attribute.Component<'evento-sp.producto', true>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::planeacion.planeacion'
     > &
       Schema.Attribute.Private;
   };
@@ -972,8 +979,8 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
       'api::municipio.municipio': ApiMunicipioMunicipio;
+      'api::planeacion.planeacion': ApiPlaneacionPlaneacion;
       'api::subregion.subregion': ApiSubregionSubregion;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

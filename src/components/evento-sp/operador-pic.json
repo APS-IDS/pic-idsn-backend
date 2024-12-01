@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_evento_sp_operador_pics",
+  "info": {
+    "displayName": "Operador PIC",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "nombre_entidad": {
+      "type": "string"
+    },
+    "municipio": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::municipio.municipio"
+    },
+    "descripcion": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_evento_sp_unidad_medidas",
+  "info": {
+    "displayName": "Unidad medida",
+    "icon": "chartCircle"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}

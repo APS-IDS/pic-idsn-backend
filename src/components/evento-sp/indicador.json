@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_evento_sp_indicadors",
+  "info": {
+    "displayName": "Indicador",
+    "icon": "chartBubble",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "descripcion": {
+      "type": "text"
+    }
+  }
+}

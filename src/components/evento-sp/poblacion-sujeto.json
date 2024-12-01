@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_evento_sp_poblacion_sujetos",
+  "info": {
+    "displayName": "Poblacion sujeto",
+    "icon": "eye"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}
