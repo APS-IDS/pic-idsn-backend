@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_evento_sp_microterritorios",
+  "info": {
+    "displayName": "Microterritorio",
+    "icon": "arrowUp"
+  },
+  "options": {},
+  "attributes": {
+    "id_microterritorio": {
+      "type": "string"
+    },
+    "tipo": {
+      "type": "enumeration",
+      "enum": [
+        "urbano",
+        "rural"
+      ]
+    }
+  }
+}

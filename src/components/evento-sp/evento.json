@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_evento_sp_eventos",
+  "info": {
+    "displayName": "Evento",
+    "icon": "chartPie"
+  },
+  "options": {},
+  "attributes": {
+    "descripcion": {
+      "type": "text"
+    },
+    "indicadores": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.indicador"
+    },
+    "ejes_estrategicos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.eje-estrategico"
+    },
+    "lineas_operativa": {
+      "type": "component",
+      "repeatable": false,
+      "component": "evento-sp.linea-operativa"
+    },
+    "productos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.producto"
+    }
+  }
+}

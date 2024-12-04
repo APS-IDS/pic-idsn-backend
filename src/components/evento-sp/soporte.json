@@ -2,7 +2,8 @@
   "collectionName": "components_evento_sp_soportes",
   "info": {
     "displayName": "Soporte",
-    "icon": "attachment"
+    "icon": "attachment",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -13,17 +14,23 @@
       "type": "text"
     },
     "archivos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "valor_porcentual": {
       "type": "decimal"
+    },
+    "municipio": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::municipio.municipio"
     }
   }
 }

@@ -29,18 +29,34 @@ export interface EventoSpUbicacion extends Struct.ComponentSchema {
   };
 }
 
+export interface EventoSpTerritorio extends Struct.ComponentSchema {
+  collectionName: 'components_evento_sp_territorios';
+  info: {
+    displayName: 'Territorio';
+    icon: 'pinMap';
+  };
+  attributes: {
+    id_territorio: Schema.Attribute.String;
+    tipo: Schema.Attribute.Enumeration<['urbano', 'rural']>;
+  };
+}
+
 export interface EventoSpTerritorializacion extends Struct.ComponentSchema {
   collectionName: 'components_evento_sp_territorializacions';
   info: {
     displayName: 'Territorializacion';
     icon: 'command';
+    description: '';
   };
   attributes: {
     ubicacion: Schema.Attribute.Component<'evento-sp.ubicacion', false>;
-    codigo_microterritorio: Schema.Attribute.String;
     numero_microterritorios: Schema.Attribute.Integer;
     numero_hogares: Schema.Attribute.Integer;
-    codigo_territorio: Schema.Attribute.String;
+    territorio: Schema.Attribute.Component<'evento-sp.territorio', true>;
+    microterritorio: Schema.Attribute.Component<
+      'evento-sp.microterritorio',
+      true
+    >;
   };
 }
 
@@ -60,6 +76,7 @@ export interface EventoSpSoporte extends Struct.ComponentSchema {
   info: {
     displayName: 'Soporte';
     icon: 'attachment';
+    description: '';
   };
   attributes: {
     tipo: Schema.Attribute.String;
@@ -69,6 +86,10 @@ export interface EventoSpSoporte extends Struct.ComponentSchema {
       true
     >;
     valor_porcentual: Schema.Attribute.Decimal;
+    municipio: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::municipio.municipio'
+    >;
   };
 }
 
@@ -125,15 +146,15 @@ export interface EventoSpOperadorPic extends Struct.ComponentSchema {
   };
 }
 
-export interface EventoSpMetasIndicadores extends Struct.ComponentSchema {
-  collectionName: 'components_evento_sp_metas_indicadores';
+export interface EventoSpMicroterritorio extends Struct.ComponentSchema {
+  collectionName: 'components_evento_sp_microterritorios';
   info: {
-    displayName: 'Metas Indicadores';
+    displayName: 'Microterritorio';
     icon: 'arrowUp';
   };
   attributes: {
-    indicador: Schema.Attribute.Component<'evento-sp.indicador', false>;
-    meta_resultado: Schema.Attribute.String;
+    id_microterritorio: Schema.Attribute.String;
+    tipo: Schema.Attribute.Enumeration<['urbano', 'rural']>;
   };
 }
 
@@ -158,6 +179,28 @@ export interface EventoSpIndicador extends Struct.ComponentSchema {
   attributes: {
     nombre: Schema.Attribute.String;
     descripcion: Schema.Attribute.Text;
+    meta_resultado: Schema.Attribute.String;
+  };
+}
+
+export interface EventoSpEvento extends Struct.ComponentSchema {
+  collectionName: 'components_evento_sp_eventos';
+  info: {
+    displayName: 'Evento';
+    icon: 'chartPie';
+  };
+  attributes: {
+    descripcion: Schema.Attribute.Text;
+    indicadores: Schema.Attribute.Component<'evento-sp.indicador', true>;
+    ejes_estrategicos: Schema.Attribute.Component<
+      'evento-sp.eje-estrategico',
+      true
+    >;
+    lineas_operativa: Schema.Attribute.Component<
+      'evento-sp.linea-operativa',
+      false
+    >;
+    productos: Schema.Attribute.Component<'evento-sp.producto', true>;
   };
 }
 
@@ -241,6 +284,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'evento-sp.unidad-medida': EventoSpUnidadMedida;
       'evento-sp.ubicacion': EventoSpUbicacion;
+      'evento-sp.territorio': EventoSpTerritorio;
       'evento-sp.territorializacion': EventoSpTerritorializacion;
       'evento-sp.tecnologia': EventoSpTecnologia;
       'evento-sp.soporte': EventoSpSoporte;
@@ -248,9 +292,10 @@ declare module '@strapi/strapi' {
       'evento-sp.poblacion-sujeto': EventoSpPoblacionSujeto;
       'evento-sp.perfil-profesional': EventoSpPerfilProfesional;
       'evento-sp.operador-pic': EventoSpOperadorPic;
-      'evento-sp.metas-indicadores': EventoSpMetasIndicadores;
+      'evento-sp.microterritorio': EventoSpMicroterritorio;
       'evento-sp.linea-operativa': EventoSpLineaOperativa;
       'evento-sp.indicador': EventoSpIndicador;
+      'evento-sp.evento': EventoSpEvento;
       'evento-sp.equipo': EventoSpEquipo;
       'evento-sp.entorno': EventoSpEntorno;
       'evento-sp.eje-estrategico': EventoSpEjeEstrategico;

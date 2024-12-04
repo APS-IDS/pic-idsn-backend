@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "anexo_tecnicos",
+  "info": {
+    "singularName": "anexo-tecnico",
+    "pluralName": "anexo-tecnicos",
+    "displayName": "Anexo tecnico",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "territorializacion": {
+      "type": "component",
+      "repeatable": false,
+      "component": "evento-sp.territorializacion"
+    },
+    "eventos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.evento"
+    }
+  }
+}

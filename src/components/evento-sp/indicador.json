@@ -12,6 +12,9 @@
     },
     "descripcion": {
       "type": "text"
+    },
+    "meta_resultado": {
+      "type": "string"
     }
   }
 }

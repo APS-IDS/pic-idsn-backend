@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_evento_sp_territorios",
+  "info": {
+    "displayName": "Territorio",
+    "icon": "pinMap"
+  },
+  "options": {},
+  "attributes": {
+    "id_territorio": {
+      "type": "string"
+    },
+    "tipo": {
+      "type": "enumeration",
+      "enum": [
+        "urbano",
+        "rural"
+      ]
+    }
+  }
+}
