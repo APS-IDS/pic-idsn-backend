@@ -4,7 +4,8 @@
   "info": {
     "singularName": "municipio",
     "pluralName": "municipios",
-    "displayName": "Municipio"
+    "displayName": "Municipio",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -14,6 +15,12 @@
     "nombre": {
       "type": "string",
       "required": true
+    },
+    "subregion": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subregion.subregion",
+      "inversedBy": "municipios"
     }
   }
 }

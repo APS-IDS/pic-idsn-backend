@@ -2,7 +2,8 @@
   "collectionName": "components_evento_sp_eventos",
   "info": {
     "displayName": "Evento",
-    "icon": "chartPie"
+    "icon": "chartPie",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -24,10 +25,15 @@
       "repeatable": false,
       "component": "evento-sp.linea-operativa"
     },
-    "productos": {
+    "operador_pic": {
       "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.producto"
+      "repeatable": false,
+      "component": "evento-sp.operador-pic"
+    },
+    "contenido_producto": {
+      "type": "component",
+      "repeatable": false,
+      "component": "evento-sp.contenido-producto"
     }
   }
 }

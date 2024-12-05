@@ -2,7 +2,8 @@
   "collectionName": "components_evento_sp_microterritorios",
   "info": {
     "displayName": "Microterritorio",
-    "icon": "arrowUp"
+    "icon": "arrowUp",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -15,6 +16,9 @@
         "urbano",
         "rural"
       ]
+    },
+    "nombre": {
+      "type": "string"
     }
   }
 }

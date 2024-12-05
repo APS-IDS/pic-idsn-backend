@@ -535,12 +535,17 @@ export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
     singularName: 'municipio';
     pluralName: 'municipios';
     displayName: 'Municipio';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    subregion: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::subregion.subregion'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -569,6 +574,10 @@ export interface ApiSubregionSubregion extends Struct.CollectionTypeSchema {
   };
   attributes: {
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    municipios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::municipio.municipio'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

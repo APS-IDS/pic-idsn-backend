@@ -14,6 +14,12 @@
     "nombre": {
       "type": "string",
       "required": true
+    },
+    "municipios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::municipio.municipio",
+      "mappedBy": "subregion"
     }
   }
 }

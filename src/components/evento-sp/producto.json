@@ -7,9 +7,6 @@
   },
   "options": {},
   "attributes": {
-    "descripcion": {
-      "type": "text"
-    },
     "indicador": {
       "type": "text"
     },
