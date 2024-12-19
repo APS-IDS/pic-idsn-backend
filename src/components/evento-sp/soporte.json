@@ -23,14 +23,6 @@
         "videos",
         "audios"
       ]
-    },
-    "valor_porcentual": {
-      "type": "decimal"
-    },
-    "municipio": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::municipio.municipio"
     }
   }
 }

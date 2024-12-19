@@ -10,11 +10,14 @@
     "nombre": {
       "type": "string"
     },
-    "descripcion": {
-      "type": "text"
-    },
     "meta_resultado": {
       "type": "string"
+    },
+    "linea_base": {
+      "type": "string"
+    },
+    "cantidad": {
+      "type": "decimal"
     }
   }
 }

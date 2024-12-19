@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_evento_sp_perfil_operativos",
+  "info": {
+    "displayName": "perfil operativo",
+    "icon": "attachment"
+  },
+  "options": {},
+  "attributes": {
+    "descripcion": {
+      "type": "text"
+    }
+  }
+}

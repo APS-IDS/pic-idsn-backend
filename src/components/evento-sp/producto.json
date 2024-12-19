@@ -7,16 +7,18 @@
   },
   "options": {},
   "attributes": {
-    "indicador": {
-      "type": "text"
-    },
-    "indicador_linea_base": {
-      "type": "text"
-    },
     "actividades": {
       "type": "component",
       "repeatable": true,
       "component": "evento-sp.actividad"
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "operador_pic": {
+      "type": "component",
+      "repeatable": false,
+      "component": "evento-sp.operador-pic"
     }
   }
 }

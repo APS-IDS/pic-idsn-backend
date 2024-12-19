@@ -9,11 +9,6 @@
     "nombre_entidad": {
       "type": "string"
     },
-    "municipio": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::municipio.municipio"
-    },
     "descripcion": {
       "type": "text"
     }

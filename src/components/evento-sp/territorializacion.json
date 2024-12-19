@@ -7,28 +7,17 @@
   },
   "options": {},
   "attributes": {
-    "ubicacion": {
-      "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.ubicacion"
-    },
-    "numero_microterritorios": {
-      "type": "integer"
-    },
     "numero_hogares": {
       "type": "integer"
     },
+    "municipio": {
+      "type": "string"
+    },
     "territorio": {
-      "displayName": "Territorio",
-      "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.territorio"
+      "type": "string"
     },
     "microterritorio": {
-      "displayName": "Microterritorio",
-      "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.microterritorio"
+      "type": "string"
     }
   }
 }

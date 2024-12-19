@@ -11,36 +11,6 @@ export interface EventoSpUnidadMedida extends Struct.ComponentSchema {
   };
 }
 
-export interface EventoSpUbicacion extends Struct.ComponentSchema {
-  collectionName: 'components_evento_sp_ubicacions';
-  info: {
-    displayName: 'Ubicacion';
-    icon: 'pinMap';
-  };
-  attributes: {
-    municipio: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::municipio.municipio'
-    >;
-    subregion: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::subregion.subregion'
-    >;
-  };
-}
-
-export interface EventoSpTerritorio extends Struct.ComponentSchema {
-  collectionName: 'components_evento_sp_territorios';
-  info: {
-    displayName: 'Territorio';
-    icon: 'pinMap';
-  };
-  attributes: {
-    id_territorio: Schema.Attribute.String;
-    tipo: Schema.Attribute.Enumeration<['urbano', 'rural']>;
-  };
-}
-
 export interface EventoSpTerritorializacion extends Struct.ComponentSchema {
   collectionName: 'components_evento_sp_territorializacions';
   info: {
@@ -49,14 +19,10 @@ export interface EventoSpTerritorializacion extends Struct.ComponentSchema {
     description: '';
   };
   attributes: {
-    ubicacion: Schema.Attribute.Component<'evento-sp.ubicacion', false>;
-    numero_microterritorios: Schema.Attribute.Integer;
     numero_hogares: Schema.Attribute.Integer;
-    territorio: Schema.Attribute.Component<'evento-sp.territorio', true>;
-    microterritorio: Schema.Attribute.Component<
-      'evento-sp.microterritorio',
-      true
-    >;
+    municipio: Schema.Attribute.String;
+    territorio: Schema.Attribute.String;
+    microterritorio: Schema.Attribute.String;
   };
 }
 
@@ -85,11 +51,19 @@ export interface EventoSpSoporte extends Struct.ComponentSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    valor_porcentual: Schema.Attribute.Decimal;
-    municipio: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::municipio.municipio'
-    >;
+  };
+}
+
+export interface EventoSpProyectoIdsn extends Struct.ComponentSchema {
+  collectionName: 'components_evento_sp_proyecto_idsns';
+  info: {
+    displayName: 'proyecto_idsn';
+    icon: 'command';
+  };
+  attributes: {
+    proyecto: Schema.Attribute.String;
+    descripcion: Schema.Attribute.Text;
+    actividad_pas: Schema.Attribute.String;
   };
 }
 
@@ -101,9 +75,9 @@ export interface EventoSpProducto extends Struct.ComponentSchema {
     description: '';
   };
   attributes: {
-    indicador: Schema.Attribute.Text;
-    indicador_linea_base: Schema.Attribute.Text;
     actividades: Schema.Attribute.Component<'evento-sp.actividad', true>;
+    descripcion: Schema.Attribute.Text;
+    operador_pic: Schema.Attribute.Component<'evento-sp.operador-pic', false>;
   };
 }
 
@@ -129,6 +103,17 @@ export interface EventoSpPerfilProfesional extends Struct.ComponentSchema {
   };
 }
 
+export interface EventoSpPerfilOperativo extends Struct.ComponentSchema {
+  collectionName: 'components_evento_sp_perfil_operativos';
+  info: {
+    displayName: 'perfil operativo';
+    icon: 'attachment';
+  };
+  attributes: {
+    descripcion: Schema.Attribute.Text;
+  };
+}
+
 export interface EventoSpOperadorPic extends Struct.ComponentSchema {
   collectionName: 'components_evento_sp_operador_pics';
   info: {
@@ -137,25 +122,7 @@ export interface EventoSpOperadorPic extends Struct.ComponentSchema {
   };
   attributes: {
     nombre_entidad: Schema.Attribute.String;
-    municipio: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::municipio.municipio'
-    >;
     descripcion: Schema.Attribute.Text;
-  };
-}
-
-export interface EventoSpMicroterritorio extends Struct.ComponentSchema {
-  collectionName: 'components_evento_sp_microterritorios';
-  info: {
-    displayName: 'Microterritorio';
-    icon: 'arrowUp';
-    description: '';
-  };
-  attributes: {
-    id_microterritorio: Schema.Attribute.String;
-    tipo: Schema.Attribute.Enumeration<['urbano', 'rural']>;
-    nombre: Schema.Attribute.String;
   };
 }
 
@@ -179,8 +146,9 @@ export interface EventoSpIndicador extends Struct.ComponentSchema {
   };
   attributes: {
     nombre: Schema.Attribute.String;
-    descripcion: Schema.Attribute.Text;
     meta_resultado: Schema.Attribute.String;
+    linea_base: Schema.Attribute.String;
+    cantidad: Schema.Attribute.Decimal;
   };
 }
 
@@ -200,13 +168,10 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
     >;
     lineas_operativa: Schema.Attribute.Component<
       'evento-sp.linea-operativa',
-      false
+      true
     >;
-    operador_pic: Schema.Attribute.Component<'evento-sp.operador-pic', false>;
-    contenido_producto: Schema.Attribute.Component<
-      'evento-sp.contenido-producto',
-      false
-    >;
+    productos: Schema.Attribute.Component<'evento-sp.producto', true>;
+    proyecto_idsn: Schema.Attribute.Component<'evento-sp.proyecto-idsn', false>;
   };
 }
 
@@ -248,24 +213,10 @@ export interface EventoSpCups extends Struct.ComponentSchema {
   info: {
     displayName: 'CUPS';
     icon: 'bulletList';
+    description: '';
   };
   attributes: {
     codigo: Schema.Attribute.String;
-    sub_codigo: Schema.Attribute.String;
-    descripcion: Schema.Attribute.Text;
-    valor: Schema.Attribute.Decimal;
-  };
-}
-
-export interface EventoSpContenidoProducto extends Struct.ComponentSchema {
-  collectionName: 'components_evento_sp_contenido_productos';
-  info: {
-    displayName: 'Contenido producto';
-    icon: 'connector';
-  };
-  attributes: {
-    descripcion: Schema.Attribute.Text;
-    productos: Schema.Attribute.Component<'evento-sp.producto', true>;
   };
 }
 
@@ -284,17 +235,16 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     tecnologias: Schema.Attribute.Component<'evento-sp.tecnologia', true>;
     poblaciones: Schema.Attribute.Component<'evento-sp.poblacion-sujeto', true>;
     soportes: Schema.Attribute.Component<'evento-sp.soporte', true>;
-    equipos: Schema.Attribute.Component<'evento-sp.equipo', true>;
-    perfiles_profesionales: Schema.Attribute.Component<
+    equipo: Schema.Attribute.Component<'evento-sp.equipo', false>;
+    perfiles_profesional: Schema.Attribute.Component<
       'evento-sp.perfil-profesional',
-      true
+      false
     >;
     cups: Schema.Attribute.Component<'evento-sp.cups', true>;
-    valor_unitario: Schema.Attribute.Decimal;
-    valor_total: Schema.Attribute.Decimal;
-    Observaciones: Schema.Attribute.Text;
-    porcentaje_cumplimiento: Schema.Attribute.Decimal;
-    observaciones_seguimiento: Schema.Attribute.Text;
+    perfil_operativo: Schema.Attribute.Component<
+      'evento-sp.perfil-operativo',
+      false
+    >;
   };
 }
 
@@ -302,16 +252,15 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'evento-sp.unidad-medida': EventoSpUnidadMedida;
-      'evento-sp.ubicacion': EventoSpUbicacion;
-      'evento-sp.territorio': EventoSpTerritorio;
       'evento-sp.territorializacion': EventoSpTerritorializacion;
       'evento-sp.tecnologia': EventoSpTecnologia;
       'evento-sp.soporte': EventoSpSoporte;
+      'evento-sp.proyecto-idsn': EventoSpProyectoIdsn;
       'evento-sp.producto': EventoSpProducto;
       'evento-sp.poblacion-sujeto': EventoSpPoblacionSujeto;
       'evento-sp.perfil-profesional': EventoSpPerfilProfesional;
+      'evento-sp.perfil-operativo': EventoSpPerfilOperativo;
       'evento-sp.operador-pic': EventoSpOperadorPic;
-      'evento-sp.microterritorio': EventoSpMicroterritorio;
       'evento-sp.linea-operativa': EventoSpLineaOperativa;
       'evento-sp.indicador': EventoSpIndicador;
       'evento-sp.evento': EventoSpEvento;
@@ -319,7 +268,6 @@ declare module '@strapi/strapi' {
       'evento-sp.entorno': EventoSpEntorno;
       'evento-sp.eje-estrategico': EventoSpEjeEstrategico;
       'evento-sp.cups': EventoSpCups;
-      'evento-sp.contenido-producto': EventoSpContenidoProducto;
       'evento-sp.actividad': EventoSpActividad;
     }
   }

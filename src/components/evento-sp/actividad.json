@@ -38,14 +38,14 @@
       "repeatable": true,
       "component": "evento-sp.soporte"
     },
-    "equipos": {
+    "equipo": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "evento-sp.equipo"
     },
-    "perfiles_profesionales": {
+    "perfiles_profesional": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "evento-sp.perfil-profesional"
     },
     "cups": {
@@ -53,20 +53,10 @@
       "repeatable": true,
       "component": "evento-sp.cups"
     },
-    "valor_unitario": {
-      "type": "decimal"
-    },
-    "valor_total": {
-      "type": "decimal"
-    },
-    "Observaciones": {
-      "type": "text"
-    },
-    "porcentaje_cumplimiento": {
-      "type": "decimal"
-    },
-    "observaciones_seguimiento": {
-      "type": "text"
+    "perfil_operativo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "evento-sp.perfil-operativo"
     }
   }
 }

@@ -22,18 +22,18 @@
     },
     "lineas_operativa": {
       "type": "component",
-      "repeatable": false,
+      "repeatable": true,
       "component": "evento-sp.linea-operativa"
     },
-    "operador_pic": {
+    "productos": {
       "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.operador-pic"
+      "repeatable": true,
+      "component": "evento-sp.producto"
     },
-    "contenido_producto": {
+    "proyecto_idsn": {
       "type": "component",
       "repeatable": false,
-      "component": "evento-sp.contenido-producto"
+      "component": "evento-sp.proyecto-idsn"
     }
   }
 }

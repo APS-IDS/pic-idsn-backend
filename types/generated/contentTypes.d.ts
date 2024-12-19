@@ -1,5 +1,39 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
+export interface ApiAnexoTecnicoAnexoTecnico
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'anexo_tecnicos';
+  info: {
+    singularName: 'anexo-tecnico';
+    pluralName: 'anexo-tecnicos';
+    displayName: 'Anexo tecnico';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    territorializacion: Schema.Attribute.Component<
+      'evento-sp.territorializacion',
+      false
+    >;
+    eventos: Schema.Attribute.Component<'evento-sp.evento', true>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::anexo-tecnico.anexo-tecnico'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -495,105 +529,6 @@ export interface PluginUsersPermissionsUser
   };
 }
 
-export interface ApiAnexoTecnicoAnexoTecnico
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'anexo_tecnicos';
-  info: {
-    singularName: 'anexo-tecnico';
-    pluralName: 'anexo-tecnicos';
-    displayName: 'Anexo tecnico';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    territorializacion: Schema.Attribute.Component<
-      'evento-sp.territorializacion',
-      false
-    >;
-    eventos: Schema.Attribute.Component<'evento-sp.evento', true>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::anexo-tecnico.anexo-tecnico'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
-  collectionName: 'municipios';
-  info: {
-    singularName: 'municipio';
-    pluralName: 'municipios';
-    displayName: 'Municipio';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    nombre: Schema.Attribute.String & Schema.Attribute.Required;
-    subregion: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::subregion.subregion'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::municipio.municipio'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiSubregionSubregion extends Struct.CollectionTypeSchema {
-  collectionName: 'subregions';
-  info: {
-    singularName: 'subregion';
-    pluralName: 'subregions';
-    displayName: 'Subregi\u00F3n';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    nombre: Schema.Attribute.String & Schema.Attribute.Required;
-    municipios: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::municipio.municipio'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::subregion.subregion'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -966,6 +901,7 @@ export interface AdminTransferTokenPermission
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
+      'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
@@ -976,9 +912,6 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
-      'api::municipio.municipio': ApiMunicipioMunicipio;
-      'api::subregion.subregion': ApiSubregionSubregion;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;
