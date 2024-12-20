@@ -19,6 +19,11 @@
       "type": "component",
       "repeatable": false,
       "component": "evento-sp.operador-pic"
+    },
+    "indicadores": {
+      "type": "component",
+      "repeatable": true,
+      "component": "evento-sp.indicador"
     }
   }
 }

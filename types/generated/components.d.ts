@@ -59,11 +59,10 @@ export interface EventoSpProyectoIdsn extends Struct.ComponentSchema {
   info: {
     displayName: 'proyecto_idsn';
     icon: 'command';
+    description: '';
   };
   attributes: {
     proyecto: Schema.Attribute.String;
-    descripcion: Schema.Attribute.Text;
-    actividad_pas: Schema.Attribute.String;
   };
 }
 
@@ -78,6 +77,7 @@ export interface EventoSpProducto extends Struct.ComponentSchema {
     actividades: Schema.Attribute.Component<'evento-sp.actividad', true>;
     descripcion: Schema.Attribute.Text;
     operador_pic: Schema.Attribute.Component<'evento-sp.operador-pic', false>;
+    indicadores: Schema.Attribute.Component<'evento-sp.indicador', true>;
   };
 }
 
@@ -147,8 +147,8 @@ export interface EventoSpIndicador extends Struct.ComponentSchema {
   attributes: {
     nombre: Schema.Attribute.String;
     meta_resultado: Schema.Attribute.String;
-    linea_base: Schema.Attribute.String;
-    cantidad: Schema.Attribute.Decimal;
+    indicador_linea_base: Schema.Attribute.String;
+    cantidad: Schema.Attribute.Integer;
   };
 }
 
@@ -161,7 +161,6 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
   };
   attributes: {
     descripcion: Schema.Attribute.Text;
-    indicadores: Schema.Attribute.Component<'evento-sp.indicador', true>;
     ejes_estrategicos: Schema.Attribute.Component<
       'evento-sp.eje-estrategico',
       true

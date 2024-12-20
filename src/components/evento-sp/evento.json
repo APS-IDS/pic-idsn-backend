@@ -10,11 +10,6 @@
     "descripcion": {
       "type": "text"
     },
-    "indicadores": {
-      "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.indicador"
-    },
     "ejes_estrategicos": {
       "type": "component",
       "repeatable": true,

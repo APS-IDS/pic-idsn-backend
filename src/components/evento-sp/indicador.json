@@ -13,11 +13,11 @@
     "meta_resultado": {
       "type": "string"
     },
-    "linea_base": {
+    "indicador_linea_base": {
       "type": "string"
     },
     "cantidad": {
-      "type": "decimal"
+      "type": "integer"
     }
   }
 }
