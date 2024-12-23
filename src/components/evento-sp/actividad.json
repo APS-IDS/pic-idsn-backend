@@ -55,6 +55,9 @@
       "type": "component",
       "repeatable": true,
       "component": "evento-sp.soporte"
+    },
+    "cronograma": {
+      "type": "json"
     }
   }
 }
