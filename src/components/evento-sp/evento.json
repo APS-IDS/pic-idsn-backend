@@ -29,6 +29,12 @@
       "type": "component",
       "repeatable": false,
       "component": "evento-sp.proyecto-idsn"
+    },
+    "indicador_evento": {
+      "type": "string"
+    },
+    "meta_indicador_evento": {
+      "type": "string"
     }
   }
 }

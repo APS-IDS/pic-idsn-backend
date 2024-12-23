@@ -13,11 +13,6 @@
     "cantidad_a_ejecutar": {
       "type": "string"
     },
-    "unidad_medida": {
-      "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.unidad-medida"
-    },
     "entornos": {
       "type": "component",
       "repeatable": true,
@@ -33,30 +28,33 @@
       "repeatable": true,
       "component": "evento-sp.poblacion-sujeto"
     },
-    "soportes": {
-      "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.soporte"
+    "unidad_medida": {
+      "type": "string"
     },
     "equipo": {
-      "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.equipo"
+      "type": "string"
     },
     "perfiles_profesional": {
-      "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.perfil-profesional"
+      "type": "string"
+    },
+    "perfil_operativo": {
+      "type": "string"
     },
     "cups": {
       "type": "component",
       "repeatable": true,
       "component": "evento-sp.cups"
     },
-    "perfil_operativo": {
+    "valor_unitario": {
+      "type": "decimal"
+    },
+    "valor_total": {
+      "type": "decimal"
+    },
+    "soportes": {
       "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.perfil-operativo"
+      "repeatable": true,
+      "component": "evento-sp.soporte"
     }
   }
 }

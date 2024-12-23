@@ -18,6 +18,9 @@
     },
     "microterritorio": {
       "type": "string"
+    },
+    "subregion": {
+      "type": "string"
     }
   }
 }

@@ -10,9 +10,6 @@
     "nombre": {
       "type": "string"
     },
-    "meta_resultado": {
-      "type": "string"
-    },
     "indicador_linea_base": {
       "type": "string"
     },

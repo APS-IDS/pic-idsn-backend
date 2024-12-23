@@ -23,6 +23,7 @@ export interface EventoSpTerritorializacion extends Struct.ComponentSchema {
     municipio: Schema.Attribute.String;
     territorio: Schema.Attribute.String;
     microterritorio: Schema.Attribute.String;
+    subregion: Schema.Attribute.String;
   };
 }
 
@@ -50,6 +51,10 @@ export interface EventoSpSoporte extends Struct.ComponentSchema {
     archivos: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
+    >;
+    users: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
     >;
   };
 }
@@ -146,7 +151,6 @@ export interface EventoSpIndicador extends Struct.ComponentSchema {
   };
   attributes: {
     nombre: Schema.Attribute.String;
-    meta_resultado: Schema.Attribute.String;
     indicador_linea_base: Schema.Attribute.String;
     cantidad: Schema.Attribute.Integer;
   };
@@ -171,6 +175,8 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
     >;
     productos: Schema.Attribute.Component<'evento-sp.producto', true>;
     proyecto_idsn: Schema.Attribute.Component<'evento-sp.proyecto-idsn', false>;
+    indicador_evento: Schema.Attribute.String;
+    meta_indicador_evento: Schema.Attribute.String;
   };
 }
 
@@ -229,21 +235,17 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
   attributes: {
     descripcion: Schema.Attribute.Text;
     cantidad_a_ejecutar: Schema.Attribute.String;
-    unidad_medida: Schema.Attribute.Component<'evento-sp.unidad-medida', false>;
     entornos: Schema.Attribute.Component<'evento-sp.entorno', true>;
     tecnologias: Schema.Attribute.Component<'evento-sp.tecnologia', true>;
     poblaciones: Schema.Attribute.Component<'evento-sp.poblacion-sujeto', true>;
-    soportes: Schema.Attribute.Component<'evento-sp.soporte', true>;
-    equipo: Schema.Attribute.Component<'evento-sp.equipo', false>;
-    perfiles_profesional: Schema.Attribute.Component<
-      'evento-sp.perfil-profesional',
-      false
-    >;
+    unidad_medida: Schema.Attribute.String;
+    equipo: Schema.Attribute.String;
+    perfiles_profesional: Schema.Attribute.String;
+    perfil_operativo: Schema.Attribute.String;
     cups: Schema.Attribute.Component<'evento-sp.cups', true>;
-    perfil_operativo: Schema.Attribute.Component<
-      'evento-sp.perfil-operativo',
-      false
-    >;
+    valor_unitario: Schema.Attribute.Decimal;
+    valor_total: Schema.Attribute.Decimal;
+    soportes: Schema.Attribute.Component<'evento-sp.soporte', true>;
   };
 }
 

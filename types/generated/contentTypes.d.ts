@@ -1,39 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ApiAnexoTecnicoAnexoTecnico
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'anexo_tecnicos';
-  info: {
-    singularName: 'anexo-tecnico';
-    pluralName: 'anexo-tecnicos';
-    displayName: 'Anexo tecnico';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    territorializacion: Schema.Attribute.Component<
-      'evento-sp.territorializacion',
-      false
-    >;
-    eventos: Schema.Attribute.Component<'evento-sp.evento', true>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::anexo-tecnico.anexo-tecnico'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -529,6 +495,77 @@ export interface PluginUsersPermissionsUser
   };
 }
 
+export interface ApiAnexoTecnicoAnexoTecnico
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'anexo_tecnicos';
+  info: {
+    singularName: 'anexo-tecnico';
+    pluralName: 'anexo-tecnicos';
+    displayName: 'Anexo tecnico';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    territorializacion: Schema.Attribute.Component<
+      'evento-sp.territorializacion',
+      false
+    >;
+    eventos: Schema.Attribute.Component<'evento-sp.evento', true>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::anexo-tecnico.anexo-tecnico'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSoporteSoporte extends Struct.CollectionTypeSchema {
+  collectionName: 'soportes';
+  info: {
+    singularName: 'soporte';
+    pluralName: 'soportes';
+    displayName: 'soporte';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Schema.Attribute.String;
+    descripcion: Schema.Attribute.Text;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    archivos: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::soporte.soporte'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -901,7 +938,6 @@ export interface AdminTransferTokenPermission
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
-      'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
@@ -912,6 +948,8 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
+      'api::soporte.soporte': ApiSoporteSoporte;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;
