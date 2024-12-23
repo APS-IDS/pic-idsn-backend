@@ -150,7 +150,7 @@ export interface EventoSpIndicador extends Struct.ComponentSchema {
     description: '';
   };
   attributes: {
-    nombre: Schema.Attribute.String;
+    meta_producto: Schema.Attribute.String;
     indicador_linea_base: Schema.Attribute.String;
     cantidad: Schema.Attribute.Integer;
   };

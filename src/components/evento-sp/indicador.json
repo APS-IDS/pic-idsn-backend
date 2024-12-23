@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "nombre": {
+    "meta_producto": {
       "type": "string"
     },
     "indicador_linea_base": {
