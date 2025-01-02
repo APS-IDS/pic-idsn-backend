@@ -177,6 +177,13 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
     proyecto_idsn: Schema.Attribute.Component<'evento-sp.proyecto-idsn', false>;
     indicador_evento: Schema.Attribute.String;
     meta_indicador_evento: Schema.Attribute.String;
+    territorializacion: Schema.Attribute.Component<
+      'evento-sp.territorializacion',
+      false
+    >;
+    equipo: Schema.Attribute.String;
+    perfiles_profesional: Schema.Attribute.String;
+    perfil_operativo: Schema.Attribute.String;
   };
 }
 
@@ -239,9 +246,6 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     tecnologias: Schema.Attribute.Component<'evento-sp.tecnologia', true>;
     poblaciones: Schema.Attribute.Component<'evento-sp.poblacion-sujeto', true>;
     unidad_medida: Schema.Attribute.String;
-    equipo: Schema.Attribute.String;
-    perfiles_profesional: Schema.Attribute.String;
-    perfil_operativo: Schema.Attribute.String;
     cups: Schema.Attribute.Component<'evento-sp.cups', true>;
     valor_unitario: Schema.Attribute.Decimal;
     valor_total: Schema.Attribute.Decimal;

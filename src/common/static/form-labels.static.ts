@@ -6,7 +6,6 @@ export const FORM_LABELS = {
     "Atención Primaria en Salud",
     "Cambio climático, emergencias, desastres y pandemias",
     "Conocimiento en salud pública y Soberanía Sanitaria",
-    "Personal de salud",
   ],
   lineas_operativas: ["Cuidado de la salud en el territorio"],
   entornos: [
@@ -14,7 +13,7 @@ export const FORM_LABELS = {
     "Comunitario",
     "Educativo",
     "Laboral-informal",
-    "Istitucional",
+    "Institucional",
   ],
   tecnologias: [
     "Caracterización social y ambiental en entornos de vida cotidiana",

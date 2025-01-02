@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "territorializacion": {
-      "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.territorializacion"
-    },
     "eventos": {
       "type": "component",
       "repeatable": true,

@@ -31,15 +31,6 @@
     "unidad_medida": {
       "type": "string"
     },
-    "equipo": {
-      "type": "string"
-    },
-    "perfiles_profesional": {
-      "type": "string"
-    },
-    "perfil_operativo": {
-      "type": "string"
-    },
     "cups": {
       "type": "component",
       "repeatable": true,

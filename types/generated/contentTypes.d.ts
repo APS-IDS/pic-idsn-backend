@@ -508,10 +508,6 @@ export interface ApiAnexoTecnicoAnexoTecnico
     draftAndPublish: false;
   };
   attributes: {
-    territorializacion: Schema.Attribute.Component<
-      'evento-sp.territorializacion',
-      false
-    >;
     eventos: Schema.Attribute.Component<'evento-sp.evento', true>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;

@@ -35,6 +35,20 @@
     },
     "meta_indicador_evento": {
       "type": "string"
+    },
+    "territorializacion": {
+      "type": "component",
+      "repeatable": false,
+      "component": "evento-sp.territorializacion"
+    },
+    "equipo": {
+      "type": "string"
+    },
+    "perfiles_profesional": {
+      "type": "string"
+    },
+    "perfil_operativo": {
+      "type": "string"
     }
   }
 }
