@@ -56,6 +56,7 @@ export interface EventoSpSoporte extends Struct.ComponentSchema {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    cantidad: Schema.Attribute.Integer;
   };
 }
 

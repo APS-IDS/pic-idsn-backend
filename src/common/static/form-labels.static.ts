@@ -1,4 +1,5 @@
 export const FORM_LABELS = {
+  equipos: ["Equipos básicos en salud", "Equipo complementario"],
   ejes: [
     "Gobernabilidad y gobernanza de la salud pública ",
     "Pueblos y comunidades étnicas y campesinas, mujeres, sectores LGBTIQ+ y otras poblaciones por condición y/o situación.",
