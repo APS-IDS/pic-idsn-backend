@@ -247,7 +247,7 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     tecnologias: Schema.Attribute.Component<'evento-sp.tecnologia', true>;
     poblaciones: Schema.Attribute.Component<'evento-sp.poblacion-sujeto', true>;
     unidad_medida: Schema.Attribute.String;
-    cups: Schema.Attribute.Component<'evento-sp.cups', true>;
+    cups: Schema.Attribute.Component<'evento-sp.cups', false>;
     valor_unitario: Schema.Attribute.Decimal;
     valor_total: Schema.Attribute.Decimal;
     soportes: Schema.Attribute.Component<'evento-sp.soporte', true>;

@@ -33,7 +33,7 @@
     },
     "cups": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "evento-sp.cups"
     },
     "valor_unitario": {
