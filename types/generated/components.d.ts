@@ -175,7 +175,6 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
       true
     >;
     productos: Schema.Attribute.Component<'evento-sp.producto', true>;
-    proyecto_idsn: Schema.Attribute.Component<'evento-sp.proyecto-idsn', false>;
     indicador_evento: Schema.Attribute.String;
     meta_indicador_evento: Schema.Attribute.String;
     territorializacion: Schema.Attribute.Component<
@@ -185,6 +184,10 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
     equipo: Schema.Attribute.String;
     perfiles_profesional: Schema.Attribute.String;
     perfil_operativo: Schema.Attribute.String;
+    proyectos_idsn: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::proyectos-idsn.proyectos-idsn'
+    >;
   };
 }
 

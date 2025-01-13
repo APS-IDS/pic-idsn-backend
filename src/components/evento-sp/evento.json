@@ -25,11 +25,6 @@
       "repeatable": true,
       "component": "evento-sp.producto"
     },
-    "proyecto_idsn": {
-      "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.proyecto-idsn"
-    },
     "indicador_evento": {
       "type": "string"
     },
@@ -49,6 +44,11 @@
     },
     "perfil_operativo": {
       "type": "string"
+    },
+    "proyectos_idsn": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::proyectos-idsn.proyectos-idsn"
     }
   }
 }
