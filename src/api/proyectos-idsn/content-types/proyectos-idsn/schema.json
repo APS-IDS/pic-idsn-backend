@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "proyectos_idsns",
+  "info": {
+    "singularName": "proyectos-idsn",
+    "pluralName": "proyectos-idsns",
+    "displayName": "Proyectos IDSN"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "proyecto": {
+      "type": "string"
+    },
+    "descripcion": {
+      "type": "text"
+    }
+  }
+}

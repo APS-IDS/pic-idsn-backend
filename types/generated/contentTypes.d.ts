@@ -555,6 +555,36 @@ export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProyectosIdsnProyectosIdsn
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'proyectos_idsns';
+  info: {
+    singularName: 'proyectos-idsn';
+    pluralName: 'proyectos-idsns';
+    displayName: 'Proyectos IDSN';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    proyecto: Schema.Attribute.String;
+    descripcion: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::proyectos-idsn.proyectos-idsn'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSeededDataSeededData extends Struct.CollectionTypeSchema {
   collectionName: 'seeded_data_s';
   info: {
@@ -1004,6 +1034,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
       'api::municipio.municipio': ApiMunicipioMunicipio;
+      'api::proyectos-idsn.proyectos-idsn': ApiProyectosIdsnProyectosIdsn;
       'api::seeded-data.seeded-data': ApiSeededDataSeededData;
       'api::soporte.soporte': ApiSoporteSoporte;
       'admin::permission': AdminPermission;
