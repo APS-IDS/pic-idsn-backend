@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "seeded_data_s",
+  "info": {
+    "singularName": "seeded-data",
+    "pluralName": "seeded-data-s",
+    "displayName": "Seeded Data"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fileName": {
+      "type": "string"
+    }
+  }
+}

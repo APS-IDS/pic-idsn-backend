@@ -525,6 +525,64 @@ export interface ApiAnexoTecnicoAnexoTecnico
   };
 }
 
+export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
+  collectionName: 'municipios';
+  info: {
+    singularName: 'municipio';
+    pluralName: 'municipios';
+    displayName: 'municipio';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nodo: Schema.Attribute.String;
+    nombre_municipio: Schema.Attribute.String;
+    codigo: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::municipio.municipio'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSeededDataSeededData extends Struct.CollectionTypeSchema {
+  collectionName: 'seeded_data_s';
+  info: {
+    singularName: 'seeded-data';
+    pluralName: 'seeded-data-s';
+    displayName: 'Seeded Data';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    fileName: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::seeded-data.seeded-data'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSoporteSoporte extends Struct.CollectionTypeSchema {
   collectionName: 'soportes';
   info: {
@@ -945,6 +1003,8 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
+      'api::municipio.municipio': ApiMunicipioMunicipio;
+      'api::seeded-data.seeded-data': ApiSeededDataSeededData;
       'api::soporte.soporte': ApiSoporteSoporte;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
