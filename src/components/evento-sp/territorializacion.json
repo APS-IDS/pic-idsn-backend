@@ -10,17 +10,16 @@
     "numero_hogares": {
       "type": "integer"
     },
-    "municipio": {
-      "type": "string"
-    },
     "territorio": {
       "type": "string"
     },
     "microterritorio": {
       "type": "string"
     },
-    "subregion": {
-      "type": "string"
+    "municipios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::municipio.municipio"
     }
   }
 }

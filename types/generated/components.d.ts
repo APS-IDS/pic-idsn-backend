@@ -20,10 +20,12 @@ export interface EventoSpTerritorializacion extends Struct.ComponentSchema {
   };
   attributes: {
     numero_hogares: Schema.Attribute.Integer;
-    municipio: Schema.Attribute.String;
     territorio: Schema.Attribute.String;
     microterritorio: Schema.Attribute.String;
-    subregion: Schema.Attribute.String;
+    municipios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::municipio.municipio'
+    >;
   };
 }
 
