@@ -613,27 +613,28 @@ export interface ApiSeededDataSeededData extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiSoporteSoporte extends Struct.CollectionTypeSchema {
-  collectionName: 'soportes';
+export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
+  collectionName: 'seguimientos';
   info: {
-    singularName: 'soporte';
-    pluralName: 'soportes';
-    displayName: 'soporte';
+    singularName: 'seguimiento';
+    pluralName: 'seguimientos';
+    displayName: 'Seguimiento';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    nombre: Schema.Attribute.String;
-    descripcion: Schema.Attribute.Text;
-    user: Schema.Attribute.Relation<
+    soporte_id: Schema.Attribute.Integer;
+    municipio: Schema.Attribute.Relation<
       'oneToOne',
-      'plugin::users-permissions.user'
+      'api::municipio.municipio'
     >;
     archivos: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    enlace: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -644,7 +645,7 @@ export interface ApiSoporteSoporte extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::soporte.soporte'
+      'api::seguimiento.seguimiento'
     > &
       Schema.Attribute.Private;
   };
@@ -1036,7 +1037,7 @@ declare module '@strapi/strapi' {
       'api::municipio.municipio': ApiMunicipioMunicipio;
       'api::proyectos-idsn.proyectos-idsn': ApiProyectosIdsnProyectosIdsn;
       'api::seeded-data.seeded-data': ApiSeededDataSeededData;
-      'api::soporte.soporte': ApiSoporteSoporte;
+      'api::seguimiento.seguimiento': ApiSeguimientoSeguimiento;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

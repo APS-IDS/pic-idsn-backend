@@ -50,14 +50,6 @@ export interface EventoSpSoporte extends Struct.ComponentSchema {
   attributes: {
     tipo: Schema.Attribute.String;
     descripcion: Schema.Attribute.Text;
-    archivos: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    users: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
     cantidad: Schema.Attribute.Integer;
   };
 }

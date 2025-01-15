@@ -13,22 +13,6 @@
     "descripcion": {
       "type": "text"
     },
-    "archivos": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "users": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
-    },
     "cantidad": {
       "type": "integer"
     }

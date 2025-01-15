@@ -1,26 +1,24 @@
 {
   "kind": "collectionType",
-  "collectionName": "soportes",
+  "collectionName": "seguimientos",
   "info": {
-    "singularName": "soporte",
-    "pluralName": "soportes",
-    "displayName": "soporte"
+    "singularName": "seguimiento",
+    "pluralName": "seguimientos",
+    "displayName": "Seguimiento",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "nombre": {
-      "type": "string"
+    "soporte_id": {
+      "type": "integer"
     },
-    "descripcion": {
-      "type": "text"
-    },
-    "user": {
+    "municipio": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "api::municipio.municipio"
     },
     "archivos": {
       "allowedTypes": [
@@ -31,6 +29,9 @@
       ],
       "type": "media",
       "multiple": true
+    },
+    "enlace": {
+      "type": "string"
     }
   }
 }
