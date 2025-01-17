@@ -557,6 +557,37 @@ export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiOperadorPicOperadorPic extends Struct.CollectionTypeSchema {
+  collectionName: 'operador_pics';
+  info: {
+    singularName: 'operador-pic';
+    pluralName: 'operador-pics';
+    displayName: 'Operador pic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nit: Schema.Attribute.String;
+    operador_pic: Schema.Attribute.String;
+    departamento: Schema.Attribute.String;
+    municipio: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::operador-pic.operador-pic'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProyectosIdsnProyectosIdsn
   extends Struct.CollectionTypeSchema {
   collectionName: 'proyectos_idsns';
@@ -1037,6 +1068,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
       'api::municipio.municipio': ApiMunicipioMunicipio;
+      'api::operador-pic.operador-pic': ApiOperadorPicOperadorPic;
       'api::proyectos-idsn.proyectos-idsn': ApiProyectosIdsnProyectosIdsn;
       'api::seeded-data.seeded-data': ApiSeededDataSeededData;
       'api::seguimiento.seguimiento': ApiSeguimientoSeguimiento;

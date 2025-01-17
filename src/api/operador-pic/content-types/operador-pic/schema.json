@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "operador_pics",
+  "info": {
+    "singularName": "operador-pic",
+    "pluralName": "operador-pics",
+    "displayName": "Operador pic"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nit": {
+      "type": "string"
+    },
+    "operador_pic": {
+      "type": "string"
+    },
+    "departamento": {
+      "type": "string"
+    },
+    "municipio": {
+      "type": "string"
+    }
+  }
+}

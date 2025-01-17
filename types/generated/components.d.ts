@@ -76,7 +76,6 @@ export interface EventoSpProducto extends Struct.ComponentSchema {
   attributes: {
     actividades: Schema.Attribute.Component<'evento-sp.actividad', true>;
     descripcion: Schema.Attribute.Text;
-    operador_pic: Schema.Attribute.Component<'evento-sp.operador-pic', false>;
     indicadores: Schema.Attribute.Component<'evento-sp.indicador', true>;
   };
 }
@@ -181,6 +180,10 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
     proyectos_idsn: Schema.Attribute.Relation<
       'oneToOne',
       'api::proyectos-idsn.proyectos-idsn'
+    >;
+    operador_pic: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::operador-pic.operador-pic'
     >;
   };
 }

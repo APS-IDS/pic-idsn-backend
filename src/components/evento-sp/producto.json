@@ -15,11 +15,6 @@
     "descripcion": {
       "type": "text"
     },
-    "operador_pic": {
-      "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.operador-pic"
-    },
     "indicadores": {
       "type": "component",
       "repeatable": true,

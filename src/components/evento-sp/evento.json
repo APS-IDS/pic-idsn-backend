@@ -49,6 +49,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::proyectos-idsn.proyectos-idsn"
+    },
+    "operador_pic": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::operador-pic.operador-pic"
     }
   }
 }
