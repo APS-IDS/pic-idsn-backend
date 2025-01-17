@@ -531,6 +531,7 @@ export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
     singularName: 'municipio';
     pluralName: 'municipios';
     displayName: 'municipio';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -539,6 +540,7 @@ export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
     nodo: Schema.Attribute.String;
     nombre_municipio: Schema.Attribute.String;
     codigo: Schema.Attribute.String;
+    label: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

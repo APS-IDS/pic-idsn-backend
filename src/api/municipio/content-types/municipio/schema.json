@@ -4,7 +4,8 @@
   "info": {
     "singularName": "municipio",
     "pluralName": "municipios",
-    "displayName": "municipio"
+    "displayName": "municipio",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,6 +19,9 @@
       "type": "string"
     },
     "codigo": {
+      "type": "string"
+    },
+    "label": {
       "type": "string"
     }
   }
