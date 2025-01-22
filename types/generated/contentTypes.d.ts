@@ -668,6 +668,10 @@ export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
       true
     >;
     enlace: Schema.Attribute.String;
+    anexo_tecnico: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::anexo-tecnico.anexo-tecnico'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

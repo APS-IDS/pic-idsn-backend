@@ -98,10 +98,60 @@ export default factories.createCoreService(
             },
             soporte_id: soporte_id,
             archivos: uploadedFile,
+            anexo_tecnico: {
+              documentId: anexo_id,
+            },
           },
         });
 
       return response;
+    },
+    async checkSeguimiento({
+      anexoId,
+      soporteId,
+    }: {
+      anexoId: string;
+      soporteId: string;
+    }) {
+      const seguimiento = await strapi
+        .documents("api::seguimiento.seguimiento")
+        .findFirst({
+          filters: {
+            $and: [
+              {
+                anexo_tecnico: {
+                  documentId: anexoId,
+                },
+              },
+              {
+                soporte_id: soporteId,
+              },
+            ],
+          },
+          populate: {
+            archivos: true,
+            anexo_tecnico: {
+              populate: {
+                eventos: {
+                  populate: {
+                    productos: {
+                      populate: {
+                        actividades: {
+                          populate: {
+                            soportes: true,
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            municipio: true,
+          },
+        });
+
+      return seguimiento;
     },
   })
 );

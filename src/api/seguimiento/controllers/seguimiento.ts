@@ -1,10 +1,11 @@
 import { Core } from "@strapi/strapi";
 import { factories } from "@strapi/strapi";
+import { Context } from "koa";
 
 export default factories.createCoreController(
   "api::seguimiento.seguimiento",
   ({ strapi }: { strapi: Core.Strapi }) => ({
-    async uploadFile(ctx) {
+    async uploadFile(ctx: Context) {
       const user = ctx.state.user;
       const files = ctx.request["files"].files;
       console.log(ctx.request.body);
@@ -20,6 +21,18 @@ export default factories.createCoreController(
           user,
           ctx,
           files,
+        });
+
+      return result;
+    },
+    async checkSeguimiento(ctx: Context) {
+      const { anexo_id, soporte_id } = ctx.request.query;
+
+      const result = await strapi
+        .service("api::seguimiento.seguimiento")
+        .checkSeguimiento({
+          anexoId: anexo_id,
+          soporteId: soporte_id,
         });
 
       return result;

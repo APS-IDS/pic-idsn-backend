@@ -5,5 +5,10 @@ export default {
       path: "/seguimiento/upload-file",
       handler: "seguimiento.uploadFile",
     },
+    {
+      method: "GET",
+      path: "/check-seguimiento",
+      handler: "seguimiento.checkSeguimiento",
+    },
   ],
 };

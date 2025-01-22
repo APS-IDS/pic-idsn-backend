@@ -21,17 +21,23 @@
       "target": "api::municipio.municipio"
     },
     "archivos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "enlace": {
       "type": "string"
+    },
+    "anexo_tecnico": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::anexo-tecnico.anexo-tecnico"
     }
   }
 }
