@@ -482,6 +482,10 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::custom-role.custom-role'
     >;
+    operador_pic: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::operador-pic.operador-pic'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -703,6 +707,10 @@ export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
     anexo_tecnico: Schema.Attribute.Relation<
       'oneToOne',
       'api::anexo-tecnico.anexo-tecnico'
+    >;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;

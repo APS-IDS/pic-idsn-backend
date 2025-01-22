@@ -38,6 +38,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::anexo-tecnico.anexo-tecnico"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }

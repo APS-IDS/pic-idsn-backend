@@ -19,6 +19,7 @@ export default factories.createCoreService(
       files: any;
       ctx: Context;
     }) {
+      console.log("user-->", JSON.stringify(user, null, 2));
       const anexo = await strapi
         .documents("api::anexo-tecnico.anexo-tecnico")
         .findFirst({
@@ -93,6 +94,9 @@ export default factories.createCoreService(
         .documents("api::seguimiento.seguimiento")
         .create({
           data: {
+            user: {
+              documentId: user.documentId,
+            },
             municipio: {
               documentId: municipio_id,
             },
@@ -148,6 +152,7 @@ export default factories.createCoreService(
               },
             },
             municipio: true,
+            user: true,
           },
         });
 

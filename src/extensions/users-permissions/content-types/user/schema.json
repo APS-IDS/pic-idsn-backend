@@ -69,6 +69,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::custom-role.custom-role"
+    },
+    "operador_pic": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::operador-pic.operador-pic"
     }
   }
 }
