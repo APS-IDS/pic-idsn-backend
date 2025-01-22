@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "custom_roles",
+  "info": {
+    "singularName": "custom-role",
+    "pluralName": "custom-roles",
+    "displayName": "custom role",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

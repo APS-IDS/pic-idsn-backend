@@ -450,7 +450,6 @@ export interface PluginUsersPermissionsUser
     displayName: 'User';
   };
   options: {
-    timestamps: true;
     draftAndPublish: false;
   };
   attributes: {
@@ -478,6 +477,10 @@ export interface PluginUsersPermissionsUser
     role: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    custom_roles: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::custom-role.custom-role'
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -520,6 +523,35 @@ export interface ApiAnexoTecnicoAnexoTecnico
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::anexo-tecnico.anexo-tecnico'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCustomRoleCustomRole extends Struct.CollectionTypeSchema {
+  collectionName: 'custom_roles';
+  info: {
+    singularName: 'custom-role';
+    pluralName: 'custom-roles';
+    displayName: 'custom role';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::custom-role.custom-role'
     > &
       Schema.Attribute.Private;
   };
@@ -1071,6 +1103,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
+      'api::custom-role.custom-role': ApiCustomRoleCustomRole;
       'api::municipio.municipio': ApiMunicipioMunicipio;
       'api::operador-pic.operador-pic': ApiOperadorPicOperadorPic;
       'api::proyectos-idsn.proyectos-idsn': ApiProyectosIdsnProyectosIdsn;
