@@ -8,7 +8,6 @@ export default factories.createCoreController(
     async uploadFile(ctx: Context) {
       const user = ctx.state.user;
       const files = ctx.request["files"].files;
-      console.log(ctx.request.body);
 
       const { anexo_id, soporte_id, municipio_id } = ctx.request.body;
 
@@ -39,10 +38,6 @@ export default factories.createCoreController(
     },
     async deleteFile(ctx: Context) {
       const { anexo_id, soporte_id, evidencia_id } = ctx.request.body;
-
-      console.log("--->", ctx.request.body);
-
-      console.log(anexo_id, soporte_id, evidencia_id);
 
       const result = await strapi
         .service("api::seguimiento.seguimiento")
