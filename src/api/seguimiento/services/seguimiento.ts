@@ -120,7 +120,11 @@ export default factories.createCoreService(
             { soporte_id: soporte_id },
           ],
         },
-        populate: { evidencias: true },
+        populate: {
+          evidencias: {
+            populate: { archivo: true, municipio: true },
+          },
+        },
       });
     },
 
@@ -220,20 +224,49 @@ export default factories.createCoreService(
         return ctx.notFound("Evidencia no encontrada");
       }
 
+      const evidenciaToDelete = seguimiento.evidencias[index];
+
+      const file = await strapi
+        .service("plugin::upload.upload")
+        .findOne(evidenciaToDelete.archivo.id);
+
+      if (!file) {
+        return ctx.badRequest("Archivo no encontrado");
+      }
+
       evidencias.splice(index, 1);
 
-      const result = await strapi
-        .documents("api::seguimiento.seguimiento")
-        .update({
-          documentId: seguimiento.documentId,
-          data: {
-            evidencias: evidencias.map((documentId: string) => ({
-              documentId,
-            })),
-          },
-        });
+      try {
+        const seguimientoResult = await strapi
+          .documents("api::seguimiento.seguimiento")
+          .update({
+            documentId: seguimiento.documentId,
+            data: {
+              evidencias: evidencias.map((documentId: string) => ({
+                documentId,
+              })),
+            },
+          });
 
-      return result;
+        const evidenciaResult = await strapi
+          .documents("api::evidencia.evidencia")
+          .delete({
+            documentId: evidenciaToDelete.documentId,
+          });
+
+        const fileResult = await strapi
+          .service("plugin::upload.upload")
+          .remove(file);
+
+        return {
+          seguimiento: seguimientoResult,
+          file: fileResult,
+          evidencia: evidenciaResult,
+        };
+      } catch (error) {
+        strapi.log.error("Error deleting file:", error);
+        return ctx.internalServerError(error.message);
+      }
     },
   })
 );
