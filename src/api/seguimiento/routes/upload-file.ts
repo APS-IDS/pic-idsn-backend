@@ -1,5 +1,3 @@
-import path from "path";
-
 export default {
   routes: [
     {
@@ -13,9 +11,9 @@ export default {
       handler: "seguimiento.checkSeguimiento",
     },
     {
-      method: "POST",
-      path: "/seguimiento/delete-file",
-      handler: "seguimiento.deleteFile",
+      method: "PUT",
+      path: "/seguimiento/remove-file",
+      handler: "seguimiento.removeFile",
     },
   ],
 };

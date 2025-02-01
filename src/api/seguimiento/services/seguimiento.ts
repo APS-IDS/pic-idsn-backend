@@ -209,7 +209,7 @@ export default factories.createCoreService(
       return seguimiento;
     },
 
-    async deleteFile({ anexoId, soporteId, evidenciaId, ctx }) {
+    async removeFile({ anexoId, soporteId, evidenciaId, ctx }) {
       const seguimiento = await this.findSeguimiento(anexoId, soporteId);
 
       if (!seguimiento) {
