@@ -561,6 +561,38 @@ export interface ApiCustomRoleCustomRole extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEvidenciaEvidencia extends Struct.CollectionTypeSchema {
+  collectionName: 'evidencias';
+  info: {
+    singularName: 'evidencia';
+    pluralName: 'evidencias';
+    displayName: 'Evidencia';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    municipio: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::municipio.municipio'
+    >;
+    archivo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::evidencia.evidencia'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
   collectionName: 'municipios';
   info: {
@@ -695,14 +727,6 @@ export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
   };
   attributes: {
     soporte_id: Schema.Attribute.Integer;
-    municipio: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::municipio.municipio'
-    >;
-    archivos: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
     enlace: Schema.Attribute.String;
     anexo_tecnico: Schema.Attribute.Relation<
       'oneToOne',
@@ -711,6 +735,10 @@ export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
     user: Schema.Attribute.Relation<
       'oneToOne',
       'plugin::users-permissions.user'
+    >;
+    evidencias: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::evidencia.evidencia'
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -1112,6 +1140,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
       'api::custom-role.custom-role': ApiCustomRoleCustomRole;
+      'api::evidencia.evidencia': ApiEvidenciaEvidencia;
       'api::municipio.municipio': ApiMunicipioMunicipio;
       'api::operador-pic.operador-pic': ApiOperadorPicOperadorPic;
       'api::proyectos-idsn.proyectos-idsn': ApiProyectosIdsnProyectosIdsn;

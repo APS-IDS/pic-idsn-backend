@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "evidencias",
+  "info": {
+    "singularName": "evidencia",
+    "pluralName": "evidencias",
+    "displayName": "Evidencia"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "municipio": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::municipio.municipio"
+    },
+    "archivo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

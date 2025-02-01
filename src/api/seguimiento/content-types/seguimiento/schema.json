@@ -15,22 +15,6 @@
     "soporte_id": {
       "type": "integer"
     },
-    "municipio": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::municipio.municipio"
-    },
-    "archivos": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "enlace": {
       "type": "string"
     },
@@ -43,6 +27,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "evidencias": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::evidencia.evidencia"
     }
   }
 }
