@@ -37,5 +37,23 @@ export default factories.createCoreController(
 
       return result;
     },
+    async deleteFile(ctx: Context) {
+      const { anexo_id, soporte_id, evidencia_id } = ctx.request.body;
+
+      console.log("--->", ctx.request.body);
+
+      console.log(anexo_id, soporte_id, evidencia_id);
+
+      const result = await strapi
+        .service("api::seguimiento.seguimiento")
+        .deleteFile({
+          anexoId: anexo_id,
+          soporteId: soporte_id,
+          evidenciaId: evidencia_id,
+          ctx,
+        });
+
+      return result;
+    },
   })
 );

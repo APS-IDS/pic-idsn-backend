@@ -151,6 +151,7 @@ export default factories.createCoreService(
         },
       });
     },
+
     async checkSeguimiento({
       anexoId,
       soporteId,
@@ -202,6 +203,37 @@ export default factories.createCoreService(
         });
 
       return seguimiento;
+    },
+
+    async deleteFile({ anexoId, soporteId, evidenciaId, ctx }) {
+      const seguimiento = await this.findSeguimiento(anexoId, soporteId);
+
+      if (!seguimiento) {
+        return ctx.notFound("Seguimiento no encontrado");
+      }
+
+      const evidencias = seguimiento.evidencias.map((e: any) => e.documentId);
+
+      const index = evidencias.indexOf(evidenciaId);
+
+      if (index === -1) {
+        return ctx.notFound("Evidencia no encontrada");
+      }
+
+      evidencias.splice(index, 1);
+
+      const result = await strapi
+        .documents("api::seguimiento.seguimiento")
+        .update({
+          documentId: seguimiento.documentId,
+          data: {
+            evidencias: evidencias.map((documentId: string) => ({
+              documentId,
+            })),
+          },
+        });
+
+      return result;
     },
   })
 );
