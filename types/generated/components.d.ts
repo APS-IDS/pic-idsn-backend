@@ -165,7 +165,7 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
     >;
     lineas_operativa: Schema.Attribute.Component<
       'evento-sp.linea-operativa',
-      true
+      false
     >;
     productos: Schema.Attribute.Component<'evento-sp.producto', true>;
     indicador_evento: Schema.Attribute.String;

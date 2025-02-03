@@ -17,7 +17,7 @@
     },
     "lineas_operativa": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "evento-sp.linea-operativa"
     },
     "productos": {
