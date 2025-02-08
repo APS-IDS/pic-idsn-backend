@@ -625,16 +625,17 @@ export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiObservacionesOperadorObservacionesOperador
+export interface ApiObservacioneObservacione
   extends Struct.CollectionTypeSchema {
-  collectionName: 'observaciones_operadors';
+  collectionName: 'observaciones';
   info: {
-    singularName: 'observaciones-operador';
-    pluralName: 'observaciones-operadors';
-    displayName: 'Observaciones operador';
+    singularName: 'observacione';
+    pluralName: 'observaciones';
+    displayName: 'Observaciones';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     observacion: Schema.Attribute.Text;
@@ -648,6 +649,7 @@ export interface ApiObservacionesOperadorObservacionesOperador
       'api::anexo-tecnico.anexo-tecnico'
     >;
     id_actividad: Schema.Attribute.String;
+    tipo: Schema.Attribute.Enumeration<['referente', 'operador']>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -658,46 +660,7 @@ export interface ApiObservacionesOperadorObservacionesOperador
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::observaciones-operador.observaciones-operador'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiObservacionesReferenteObservacionesReferente
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'observaciones_referentes';
-  info: {
-    singularName: 'observaciones-referente';
-    pluralName: 'observaciones-referentes';
-    displayName: 'Observaciones referente';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    observacion: Schema.Attribute.Text;
-    fecha: Schema.Attribute.DateTime;
-    anexo_tecnico: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::anexo-tecnico.anexo-tecnico'
-    >;
-    user: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    id_actividad: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::observaciones-referente.observaciones-referente'
+      'api::observacione.observacione'
     > &
       Schema.Attribute.Private;
   };
@@ -1220,8 +1183,7 @@ declare module '@strapi/strapi' {
       'api::custom-role.custom-role': ApiCustomRoleCustomRole;
       'api::evidencia.evidencia': ApiEvidenciaEvidencia;
       'api::municipio.municipio': ApiMunicipioMunicipio;
-      'api::observaciones-operador.observaciones-operador': ApiObservacionesOperadorObservacionesOperador;
-      'api::observaciones-referente.observaciones-referente': ApiObservacionesReferenteObservacionesReferente;
+      'api::observacione.observacione': ApiObservacioneObservacione;
       'api::operador-pic.operador-pic': ApiOperadorPicOperadorPic;
       'api::proyectos-idsn.proyectos-idsn': ApiProyectosIdsnProyectosIdsn;
       'api::seeded-data.seeded-data': ApiSeededDataSeededData;

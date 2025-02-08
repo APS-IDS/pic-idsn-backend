@@ -4,19 +4,21 @@ import { Context } from "koa";
 import { DateTime } from "luxon";
 
 export default factories.createCoreService(
-  "api::observaciones-referente.observaciones-referente",
+  "api::observacione.observacione",
   ({ strapi }: { strapi: Core.Strapi }) => ({
     async register({
       observacion,
       anexoId,
       idActividad,
       user,
+      tipo,
       ctx,
     }: {
       observacion: string;
       anexoId: string;
       idActividad: string;
       user: any;
+      tipo: "operador" | "referente";
       ctx: Context;
     }) {
       const anexo = await this.findAnexo(anexoId, idActividad);
@@ -28,17 +30,18 @@ export default factories.createCoreService(
       const fecha = DateTime.now().setZone("America/Bogota").toISO();
 
       const observacionRecord = await strapi
-        .documents("api::observaciones-referente.observaciones-referente")
+        .documents("api::observacione.observacione")
         .findFirst({
           filters: {
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
+            tipo: tipo,
           },
         });
 
       if (observacionRecord) {
         const updatedObservacion = await strapi
-          .documents("api::observaciones-referente.observaciones-referente")
+          .documents("api::observacione.observacione")
           .update({
             documentId: observacionRecord.documentId,
             data: {
@@ -47,6 +50,7 @@ export default factories.createCoreService(
               id_actividad: idActividad,
               user: { documentId: user.documentId },
               fecha,
+              tipo,
             },
           });
 
@@ -54,7 +58,7 @@ export default factories.createCoreService(
       }
 
       const createdObservacion = await strapi
-        .documents("api::observaciones-referente.observaciones-referente")
+        .documents("api::observacione.observacione")
         .create({
           data: {
             observacion,
@@ -62,6 +66,7 @@ export default factories.createCoreService(
             id_actividad: idActividad,
             user: { documentId: user.documentId },
             fecha,
+            tipo,
           },
         });
 

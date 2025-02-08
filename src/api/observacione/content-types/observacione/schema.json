@@ -1,13 +1,14 @@
 {
   "kind": "collectionType",
-  "collectionName": "observaciones_operadors",
+  "collectionName": "observaciones",
   "info": {
-    "singularName": "observaciones-operador",
-    "pluralName": "observaciones-operadors",
-    "displayName": "Observaciones operador"
+    "singularName": "observacione",
+    "pluralName": "observaciones",
+    "displayName": "Observaciones",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -29,6 +30,13 @@
     },
     "id_actividad": {
       "type": "string"
+    },
+    "tipo": {
+      "type": "enumeration",
+      "enum": [
+        "referente",
+        "operador"
+      ]
     }
   }
 }
