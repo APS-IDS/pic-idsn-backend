@@ -51,6 +51,7 @@ export interface EventoSpSoporte extends Struct.ComponentSchema {
     tipo: Schema.Attribute.String;
     descripcion: Schema.Attribute.Text;
     cantidad: Schema.Attribute.Integer;
+    uuid: Schema.Attribute.String;
   };
 }
 

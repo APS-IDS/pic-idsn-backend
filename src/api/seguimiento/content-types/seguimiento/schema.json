@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "soporte_id": {
-      "type": "integer"
-    },
     "enlace": {
       "type": "string"
     },
@@ -32,6 +29,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::evidencia.evidencia"
+    },
+    "soporte_id": {
+      "type": "string"
     }
   }
 }

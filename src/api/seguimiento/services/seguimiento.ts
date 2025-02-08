@@ -66,7 +66,7 @@ export default factories.createCoreService(
             { documentId: anexo_id },
             {
               eventos: {
-                productos: { actividades: { soportes: { id: soporte_id } } },
+                productos: { actividades: { soportes: { uuid: soporte_id } } },
               },
             },
           ],

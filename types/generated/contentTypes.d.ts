@@ -726,7 +726,6 @@ export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    soporte_id: Schema.Attribute.Integer;
     enlace: Schema.Attribute.String;
     anexo_tecnico: Schema.Attribute.Relation<
       'oneToOne',
@@ -740,6 +739,7 @@ export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::evidencia.evidencia'
     >;
+    soporte_id: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
