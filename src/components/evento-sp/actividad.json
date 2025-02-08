@@ -49,6 +49,9 @@
     },
     "cronograma": {
       "type": "json"
+    },
+    "uuid": {
+      "type": "string"
     }
   }
 }

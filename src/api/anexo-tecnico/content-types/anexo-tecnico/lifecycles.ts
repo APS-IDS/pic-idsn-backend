@@ -39,6 +39,7 @@ export default {
                 actividades: producto.actividades.map((actividad) => {
                   return {
                     ...actividad,
+                    uuid: uuid(),
                     soportes: actividad.soportes.map((soporte) => {
                       return {
                         ...soporte,

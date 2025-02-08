@@ -625,6 +625,84 @@ export interface ApiMunicipioMunicipio extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiObservacionesOperadorObservacionesOperador
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'observaciones_operadors';
+  info: {
+    singularName: 'observaciones-operador';
+    pluralName: 'observaciones-operadors';
+    displayName: 'Observaciones operador';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    observacion: Schema.Attribute.Text;
+    fecha: Schema.Attribute.DateTime;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    anexo_tecnico: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::anexo-tecnico.anexo-tecnico'
+    >;
+    id_actividad: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::observaciones-operador.observaciones-operador'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiObservacionesReferenteObservacionesReferente
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'observaciones_referentes';
+  info: {
+    singularName: 'observaciones-referente';
+    pluralName: 'observaciones-referentes';
+    displayName: 'Observaciones referente';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    observacion: Schema.Attribute.Text;
+    fecha: Schema.Attribute.DateTime;
+    anexo_tecnico: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::anexo-tecnico.anexo-tecnico'
+    >;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    id_actividad: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::observaciones-referente.observaciones-referente'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiOperadorPicOperadorPic extends Struct.CollectionTypeSchema {
   collectionName: 'operador_pics';
   info: {
@@ -1142,6 +1220,8 @@ declare module '@strapi/strapi' {
       'api::custom-role.custom-role': ApiCustomRoleCustomRole;
       'api::evidencia.evidencia': ApiEvidenciaEvidencia;
       'api::municipio.municipio': ApiMunicipioMunicipio;
+      'api::observaciones-operador.observaciones-operador': ApiObservacionesOperadorObservacionesOperador;
+      'api::observaciones-referente.observaciones-referente': ApiObservacionesReferenteObservacionesReferente;
       'api::operador-pic.operador-pic': ApiOperadorPicOperadorPic;
       'api::proyectos-idsn.proyectos-idsn': ApiProyectosIdsnProyectosIdsn;
       'api::seeded-data.seeded-data': ApiSeededDataSeededData;

@@ -253,6 +253,7 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     valor_total: Schema.Attribute.Decimal;
     soportes: Schema.Attribute.Component<'evento-sp.soporte', true>;
     cronograma: Schema.Attribute.JSON;
+    uuid: Schema.Attribute.String;
   };
 }
 
