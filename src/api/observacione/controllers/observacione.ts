@@ -21,5 +21,19 @@ export default factories.createCoreController(
 
       return result;
     },
+
+    async customFind(ctx: Context) {
+      console.log("---------------");
+      const { anexo_id, id_actividad } = ctx.request.query;
+
+      const result = await strapi
+        .service("api::observacione.observacione")
+        .customFind({
+          anexoId: anexo_id,
+          idActividad: id_actividad,
+        });
+
+      return result;
+    },
   })
 );

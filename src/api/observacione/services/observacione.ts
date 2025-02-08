@@ -72,6 +72,35 @@ export default factories.createCoreService(
 
       return { observacion: createdObservacion, status: "created" };
     },
+
+    async customFind({
+      anexoId,
+      idActividad,
+    }: {
+      anexoId: string;
+      idActividad: string;
+    }) {
+      const observaciones = await strapi
+        .documents("api::observacione.observacione")
+        .findMany({
+          filters: {
+            anexo_tecnico: { documentId: anexoId },
+            id_actividad: idActividad,
+          },
+        });
+
+      return {
+        operador:
+          observaciones.filter(
+            (observacion) => observacion.tipo === "operador"
+          )?.[0] || null,
+        referente:
+          observaciones.filter(
+            (observacion) => observacion.tipo === "referente"
+          )?.[0] || null,
+      };
+    },
+
     async findAnexo(anexoId: string, idActividad: string) {
       return strapi.documents("api::anexo-tecnico.anexo-tecnico").findFirst({
         filters: {
