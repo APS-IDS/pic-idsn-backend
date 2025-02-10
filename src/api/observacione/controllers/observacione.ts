@@ -23,7 +23,6 @@ export default factories.createCoreController(
     },
 
     async customFind(ctx: Context) {
-      console.log("---------------");
       const { anexo_id, id_actividad } = ctx.request.query;
 
       const result = await strapi
