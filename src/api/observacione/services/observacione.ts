@@ -10,6 +10,7 @@ export default factories.createCoreService(
       observacion,
       anexoId,
       idActividad,
+      porcentajeCompletado,
       user,
       tipo,
       ctx,
@@ -17,6 +18,7 @@ export default factories.createCoreService(
       observacion: string;
       anexoId: string;
       idActividad: string;
+      porcentajeCompletado: number;
       user: any;
       tipo: "operador" | "referente";
       ctx: Context;
@@ -49,6 +51,7 @@ export default factories.createCoreService(
               anexo_tecnico: { documentId: anexoId },
               id_actividad: idActividad,
               user: { documentId: user.documentId },
+              porcentaje_completado: porcentajeCompletado,
               fecha,
               tipo,
             },

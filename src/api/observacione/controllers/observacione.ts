@@ -6,7 +6,13 @@ export default factories.createCoreController(
   ({ strapi }) => ({
     async register(ctx: Context) {
       const user = ctx.state.user;
-      const { observacion, anexo_id, id_actividad, tipo } = ctx.request.body;
+      const {
+        observacion,
+        anexo_id,
+        id_actividad,
+        tipo,
+        porcentaje_completado,
+      } = ctx.request.body;
 
       const result = await strapi
         .service("api::observacione.observacione")
@@ -14,6 +20,7 @@ export default factories.createCoreController(
           observacion,
           anexoId: anexo_id,
           idActividad: id_actividad,
+          porcentajeCompletado: porcentaje_completado,
           user,
           ctx,
           tipo,

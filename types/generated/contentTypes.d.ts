@@ -650,6 +650,14 @@ export interface ApiObservacioneObservacione
     >;
     id_actividad: Schema.Attribute.String;
     tipo: Schema.Attribute.Enumeration<['referente', 'operador']>;
+    porcentaje_completado: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 100;
+        },
+        number
+      >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
