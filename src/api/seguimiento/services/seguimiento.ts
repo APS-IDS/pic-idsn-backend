@@ -59,6 +59,31 @@ export default factories.createCoreService(
       }
     },
 
+    async evidenciaStatus({
+      anexoId,
+      soporteId,
+      status,
+      ctx,
+    }: {
+      anexoId: string;
+      soporteId: string;
+      status: "cumple" | "no cumple" | "en proceso";
+      ctx: Context;
+    }) {
+      const seguimiento = await this.findSeguimiento(anexoId, soporteId);
+
+      if (!seguimiento) {
+        return ctx.notFound("Anexo or soporte no encontrado");
+      }
+
+      return strapi.documents("api::seguimiento.seguimiento").update({
+        documentId: seguimiento.documentId,
+        data: {
+          estado: status,
+        },
+      });
+    },
+
     async findAnexo(anexo_id: string, soporte_id: string) {
       return strapi.documents("api::anexo-tecnico.anexo-tecnico").findFirst({
         filters: {

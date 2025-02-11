@@ -789,6 +789,7 @@ export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
       'api::evidencia.evidencia'
     >;
     soporte_id: Schema.Attribute.String;
+    estado: Schema.Attribute.Enumeration<['cumple', 'no cumple', 'en proceso']>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

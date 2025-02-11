@@ -24,6 +24,20 @@ export default factories.createCoreController(
 
       return result;
     },
+    async evidenciaStatus(ctx: Context) {
+      const { anexo_id, soporte_id, status } = ctx.request.body;
+
+      const result = await strapi
+        .service("api::seguimiento.seguimiento")
+        .evidenciaStatus({
+          anexoId: anexo_id,
+          soporteId: soporte_id,
+          status,
+          ctx,
+        });
+
+      return result;
+    },
     async checkSeguimiento(ctx: Context) {
       const { anexo_id, soporte_id } = ctx.request.query;
 

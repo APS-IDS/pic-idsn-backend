@@ -32,6 +32,14 @@
     },
     "soporte_id": {
       "type": "string"
+    },
+    "estado": {
+      "type": "enumeration",
+      "enum": [
+        "cumple",
+        "no cumple",
+        "en proceso"
+      ]
     }
   }
 }
