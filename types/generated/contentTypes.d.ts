@@ -658,6 +658,7 @@ export interface ApiObservacioneObservacione
         },
         number
       >;
+    estado: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

@@ -12,6 +12,7 @@ export default factories.createCoreController(
         id_actividad,
         tipo,
         porcentaje_completado,
+        estado,
       } = ctx.request.body;
 
       const result = await strapi
@@ -24,6 +25,7 @@ export default factories.createCoreController(
           user,
           ctx,
           tipo,
+          estado,
         });
 
       return result;

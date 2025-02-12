@@ -14,6 +14,7 @@ export default factories.createCoreService(
       user,
       tipo,
       ctx,
+      estado,
     }: {
       observacion: string;
       anexoId: string;
@@ -22,6 +23,7 @@ export default factories.createCoreService(
       user: any;
       tipo: "operador" | "referente";
       ctx: Context;
+      estado: string;
     }) {
       const anexo = await this.findAnexo(anexoId, idActividad);
 
@@ -52,6 +54,7 @@ export default factories.createCoreService(
               id_actividad: idActividad,
               user: { documentId: user.documentId },
               porcentaje_completado: porcentajeCompletado,
+              estado,
               fecha,
               tipo,
             },
@@ -67,6 +70,7 @@ export default factories.createCoreService(
             observacion,
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
+            estado,
             user: { documentId: user.documentId },
             fecha,
             tipo,
