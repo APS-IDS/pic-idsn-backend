@@ -72,6 +72,7 @@ export default factories.createCoreService(
             id_actividad: idActividad,
             estado,
             user: { documentId: user.documentId },
+            porcentaje_completado: porcentajeCompletado,
             fecha,
             tipo,
           },
