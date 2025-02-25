@@ -7,9 +7,17 @@ import { FORM_LABELS } from "../../../common/static/form-labels.static";
 
 export default factories.createCoreController(
   "api::anexo-tecnico.anexo-tecnico",
-  {
-    labels: async (ctx) => {
+  ({ strapi }) => ({
+    async labels(ctx) {
       return FORM_LABELS;
     },
-  }
+
+    async municipiosEventos(ctx) {
+      const result = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .municipiosEventos();
+
+      return result;
+    },
+  })
 );
