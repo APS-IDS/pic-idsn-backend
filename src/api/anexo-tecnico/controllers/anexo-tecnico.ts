@@ -19,5 +19,12 @@ export default factories.createCoreController(
 
       return result;
     },
+    async productosProyecto(ctx) {
+      const result = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .productosProyecto();
+
+      return result;
+    },
   })
 );

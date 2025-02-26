@@ -41,13 +41,53 @@ export default factories.createCoreService(
         throw new Error("Error fetching municipios eventos");
       }
     },
+    async productosProyecto() {
+      const proyectos = await this.getProyectos();
+
+      const productosPorProyecto = await Promise.all(
+        proyectos.map(async (proyecto) => {
+          const anexosTecnicos = await this.getAnexoTecnicoByProyecto(
+            proyecto.documentId
+          );
+
+          if (anexosTecnicos.length === 0) return null;
+
+          const numeroProductos = anexosTecnicos.reduce(
+            (acc, anexo) =>
+              acc +
+              anexo.eventos.reduce(
+                (acc, evento) => acc + evento.productos.length,
+                0
+              ),
+            0
+          );
+
+          return {
+            proyecto: proyecto.proyecto,
+            productos: numeroProductos,
+          };
+        })
+      );
+
+      const sortedResult = productosPorProyecto
+        .filter((item) => item !== null)
+        .sort((a, b) => b.productos - a.productos);
+
+      return { result: sortedResult };
+    },
+
     async getMunicipios() {
       return strapi.documents("api::municipio.municipio").findMany({
         page: 1,
         pageSize: 100,
       });
     },
-
+    async getProyectos() {
+      return strapi.documents("api::proyectos-idsn.proyectos-idsn").findMany({
+        page: 1,
+        pageSize: 100,
+      });
+    },
     async getAnexoTecnicoByMunicipio(municipioId: string) {
       return strapi.documents("api::anexo-tecnico.anexo-tecnico").findMany({
         populate: {
@@ -59,6 +99,24 @@ export default factories.createCoreService(
               municipios: {
                 documentId: municipioId,
               },
+            },
+          },
+        },
+      });
+    },
+    async getAnexoTecnicoByProyecto(proyectoId: string) {
+      return strapi.documents("api::anexo-tecnico.anexo-tecnico").findMany({
+        populate: {
+          eventos: {
+            populate: {
+              productos: true,
+            },
+          },
+        },
+        filters: {
+          eventos: {
+            proyectos_idsn: {
+              documentId: proyectoId,
             },
           },
         },
