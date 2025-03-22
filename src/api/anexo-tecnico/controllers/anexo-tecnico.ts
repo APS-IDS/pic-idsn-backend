@@ -40,5 +40,12 @@ export default factories.createCoreController(
 
       return result;
     },
+    async actividadesEntorno(ctx) {
+      const result = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .actividadesEntorno();
+
+      return result;
+    },
   })
 );
