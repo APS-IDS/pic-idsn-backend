@@ -75,7 +75,51 @@ export default factories.createCoreService(
 
       return { result: sortedResult };
     },
+    async eventosOperador() {
+      try {
+        const operadores = await this.getOperadores();
 
+        const eventosPorOperador = await Promise.all(
+          operadores.map(async (operador) => {
+            const anexosTecnicos = await strapi
+              .documents("api::anexo-tecnico.anexo-tecnico")
+              .findMany({
+                filters: {
+                  eventos: {
+                    operador_pic: {
+                      documentId: operador.documentId,
+                    },
+                  },
+                },
+                populate: {
+                  eventos: true,
+                },
+              });
+
+            if (anexosTecnicos.length === 0) return null;
+
+            const numeroEventos = anexosTecnicos.reduce(
+              (acc, anexo) => acc + anexo.eventos.length,
+              0
+            );
+
+            return {
+              operador: operador.operador_pic,
+              eventos: numeroEventos,
+            };
+          })
+        );
+
+        const sortedResult = eventosPorOperador
+          .filter((item) => item !== null)
+          .sort((a, b) => b.eventos - a.eventos);
+
+        return { result: sortedResult };
+      } catch (error) {
+        strapi.log.error("Error fetching eventos operador:", error);
+        throw new Error("Error fetching eventos operador");
+      }
+    },
     async getMunicipios() {
       return strapi.documents("api::municipio.municipio").findMany({
         page: 1,
@@ -84,6 +128,12 @@ export default factories.createCoreService(
     },
     async getProyectos() {
       return strapi.documents("api::proyectos-idsn.proyectos-idsn").findMany({
+        page: 1,
+        pageSize: 100,
+      });
+    },
+    async getOperadores() {
+      return strapi.documents("api::operador-pic.operador-pic").findMany({
         page: 1,
         pageSize: 100,
       });

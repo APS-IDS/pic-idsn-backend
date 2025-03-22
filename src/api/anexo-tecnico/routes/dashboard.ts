@@ -10,5 +10,10 @@ export default {
       path: "/productos-proyecto",
       handler: "anexo-tecnico.productosProyecto",
     },
+    {
+      method: "GET",
+      path: "/eventos-operador",
+      handler: "anexo-tecnico.eventosOperador",
+    },
   ],
 };

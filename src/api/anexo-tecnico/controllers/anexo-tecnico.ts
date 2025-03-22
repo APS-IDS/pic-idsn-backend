@@ -26,5 +26,12 @@ export default factories.createCoreController(
 
       return result;
     },
+    async eventosOperador(ctx) {
+      const result = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .eventosOperador();
+
+      return result;
+    },
   })
 );
