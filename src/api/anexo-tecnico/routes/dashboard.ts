@@ -15,5 +15,10 @@ export default {
       path: "/eventos-operador",
       handler: "anexo-tecnico.eventosOperador",
     },
+    {
+      method: "GET",
+      path: "/actividades-tecnologia",
+      handler: "anexo-tecnico.actividadesTecnologia",
+    },
   ],
 };

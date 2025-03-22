@@ -120,6 +120,54 @@ export default factories.createCoreService(
         throw new Error("Error fetching eventos operador");
       }
     },
+    async actividadesTecnologia() {
+      try {
+        const anexosTecnicos = await strapi
+          .documents("api::anexo-tecnico.anexo-tecnico")
+          .findMany({
+            pageSize: 100,
+            page: 1,
+            populate: {
+              eventos: {
+                populate: {
+                  productos: {
+                    populate: {
+                      actividades: {
+                        populate: {
+                          tecnologias: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          });
+
+        const result = {};
+
+        anexosTecnicos.forEach((anexo) => {
+          anexo.eventos.forEach((evento) => {
+            evento.productos.forEach((producto) => {
+              producto.actividades.forEach((actividad) => {
+                actividad.tecnologias.forEach((tecnologia) => {
+                  if (!result[tecnologia.nombre]) {
+                    result[tecnologia.nombre] = 0;
+                  }
+
+                  result[tecnologia.nombre]++;
+                });
+              });
+            });
+          });
+        });
+
+        return { result };
+      } catch (error) {
+        strapi.log.error("Error fetching actividades tecnologia:", error);
+        throw new Error("Error fetching actividades tecnologia");
+      }
+    },
     async getMunicipios() {
       return strapi.documents("api::municipio.municipio").findMany({
         page: 1,
