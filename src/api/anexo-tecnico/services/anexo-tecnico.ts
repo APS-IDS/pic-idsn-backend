@@ -3,6 +3,20 @@
  */
 
 import { Core, factories } from "@strapi/strapi";
+export interface Cronograma {
+  enero: number;
+  febrero: number;
+  marzo: number;
+  abril: number;
+  mayo: number;
+  junio: number;
+  julio: number;
+  agosto: number;
+  septiembre: number;
+  octubre: number;
+  noviembre: number;
+  diciembre: number;
+}
 
 export default factories.createCoreService(
   "api::anexo-tecnico.anexo-tecnico",
@@ -311,6 +325,69 @@ export default factories.createCoreService(
         throw new Error("Error fetching actividades tecnologia");
       }
     },
+    async soportesEstado() {
+      try {
+        const anexosTecnicos = await strapi
+          .documents("api::anexo-tecnico.anexo-tecnico")
+          .findMany({
+            pageSize: 100,
+            page: 1,
+            populate: {
+              eventos: {
+                populate: {
+                  productos: {
+                    populate: {
+                      actividades: {
+                        populate: {
+                          soportes: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          });
+
+        const result = {};
+
+        anexosTecnicos.forEach((anexo) => {
+          anexo.eventos.forEach((evento) => {
+            evento.productos.forEach((producto) => {
+              producto.actividades.forEach((actividad) => {
+                actividad.soportes.forEach(async (soporte) => {
+                  const estadoSoporte = await strapi
+                    .documents("api::seguimiento.seguimiento")
+                    .findFirst({
+                      filters: {
+                        $and: [
+                          { soporte_id: soporte.uuid },
+                          {
+                            anexo_tecnico: {
+                              documentId: anexo.documentId,
+                            },
+                          },
+                        ],
+                      },
+                    });
+
+                  if (!result[estadoSoporte.estado]) {
+                    result[estadoSoporte.estado] = 0;
+                  }
+
+                  result[estadoSoporte.estado]++;
+                });
+              });
+            });
+          });
+        });
+
+        return { result };
+      } catch (error) {
+        strapi.log.error("Error fetching actividades tecnologia:", error);
+        throw new Error("Error fetching actividades tecnologia");
+      }
+    },
     async getMunicipios() {
       return strapi.documents("api::municipio.municipio").findMany({
         page: 1,
@@ -365,18 +442,3 @@ export default factories.createCoreService(
     },
   })
 );
-
-export interface Cronograma {
-  enero: number;
-  febrero: number;
-  marzo: number;
-  abril: number;
-  mayo: number;
-  junio: number;
-  julio: number;
-  agosto: number;
-  septiembre: number;
-  octubre: number;
-  noviembre: number;
-  diciembre: number;
-}

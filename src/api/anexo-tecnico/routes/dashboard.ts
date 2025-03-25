@@ -35,5 +35,10 @@ export default {
       path: "/actividades-mes",
       handler: "anexo-tecnico.actividadesMes",
     },
+    {
+      method: "GET",
+      path: "/soportes-estado",
+      handler: "anexo-tecnico.soportesEstado",
+    },
   ],
 };

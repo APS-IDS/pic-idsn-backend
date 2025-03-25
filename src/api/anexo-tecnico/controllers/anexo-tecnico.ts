@@ -61,5 +61,12 @@ export default factories.createCoreController(
 
       return result;
     },
+    async soportesEstado(ctx) {
+      const result = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .soportesEstado();
+
+      return result;
+    },
   })
 );
