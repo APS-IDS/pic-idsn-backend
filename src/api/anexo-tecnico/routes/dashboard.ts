@@ -25,5 +25,10 @@ export default {
       path: "/actividades-entorno",
       handler: "anexo-tecnico.actividadesEntorno",
     },
+    {
+      method: "GET",
+      path: "/actividades-poblacion",
+      handler: "anexo-tecnico.actividadesPoblacion",
+    },
   ],
 };
