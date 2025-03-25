@@ -54,5 +54,12 @@ export default factories.createCoreController(
 
       return result;
     },
+    async actividadesMes(ctx) {
+      const result = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .actividadesMes();
+
+      return result;
+    },
   })
 );

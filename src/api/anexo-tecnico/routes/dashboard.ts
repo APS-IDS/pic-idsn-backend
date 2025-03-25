@@ -30,5 +30,10 @@ export default {
       path: "/actividades-poblacion",
       handler: "anexo-tecnico.actividadesPoblacion",
     },
+    {
+      method: "GET",
+      path: "/actividades-mes",
+      handler: "anexo-tecnico.actividadesMes",
+    },
   ],
 };
