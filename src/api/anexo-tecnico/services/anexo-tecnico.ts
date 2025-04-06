@@ -351,11 +351,17 @@ export default factories.createCoreService(
 
         const result = {};
 
-        anexosTecnicos.forEach((anexo) => {
-          anexo.eventos.forEach((evento) => {
-            evento.productos.forEach((producto) => {
-              producto.actividades.forEach((actividad) => {
-                actividad.soportes.forEach(async (soporte) => {
+        for (let i = 0; i < anexosTecnicos.length; i++) {
+          const anexo = anexosTecnicos[i];
+          for (let j = 0; j < anexo.eventos.length; j++) {
+            const evento = anexo.eventos[j];
+            for (let k = 0; k < evento.productos.length; k++) {
+              const producto = evento.productos[k];
+              for (let l = 0; l < producto.actividades.length; l++) {
+                const actividad = producto.actividades[l];
+                for (let m = 0; m < actividad.soportes.length; m++) {
+                  const soporte = actividad.soportes[m];
+
                   const estadoSoporte = await strapi
                     .documents("api::seguimiento.seguimiento")
                     .findFirst({
@@ -371,16 +377,18 @@ export default factories.createCoreService(
                       },
                     });
 
+                  if (!estadoSoporte?.estado) continue;
+
                   if (!result[estadoSoporte.estado]) {
                     result[estadoSoporte.estado] = 0;
                   }
 
                   result[estadoSoporte.estado]++;
-                });
-              });
-            });
-          });
-        });
+                }
+              }
+            }
+          }
+        }
 
         return { result };
       } catch (error) {
