@@ -68,5 +68,51 @@ export default factories.createCoreController(
 
       return result;
     },
+    async dasboardAll(ctx) {
+      const municipiosEventos = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .municipiosEventos();
+
+      const productosProyecto = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .productosProyecto();
+
+      const eventosOperador = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .eventosOperador();
+
+      const actividadesTecnologia = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .actividadesTecnologia();
+
+      const actividadesEntorno = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .actividadesEntorno();
+
+      const actividadesPoblacion = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .actividadesPoblacion();
+
+      const actividadesMes = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .actividadesMes();
+
+      const soportesEstado = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .soportesEstado();
+
+      const result = {
+        municipiosEventos,
+        productosProyecto,
+        eventosOperador,
+        actividadesTecnologia,
+        actividadesEntorno,
+        actividadesPoblacion,
+        actividadesMes,
+        soportesEstado,
+      };
+
+      return result;
+    },
   })
 );

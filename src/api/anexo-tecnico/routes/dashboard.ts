@@ -40,5 +40,10 @@ export default {
       path: "/soportes-estado",
       handler: "anexo-tecnico.soportesEstado",
     },
+    {
+      method: "GET",
+      path: "/dashboard-all",
+      handler: "anexo-tecnico.dasboardAll",
+    },
   ],
 };
