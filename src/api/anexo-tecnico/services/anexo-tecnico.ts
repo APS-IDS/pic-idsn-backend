@@ -312,7 +312,9 @@ export default factories.createCoreService(
                     result[mes] = 0;
                   }
 
-                  result[mes]++;
+                  if (cronogramaRecord[mes] > 0) {
+                    result[mes]++;
+                  }
                 });
               });
             });
