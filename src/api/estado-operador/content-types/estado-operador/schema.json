@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "estado_operadors",
+  "info": {
+    "singularName": "estado-operador",
+    "pluralName": "estado-operadors",
+    "displayName": "Estado Operador",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "estado_actividad": {
+      "type": "string"
+    },
+    "descripcion_estado": {
+      "type": "text"
+    }
+  }
+}
