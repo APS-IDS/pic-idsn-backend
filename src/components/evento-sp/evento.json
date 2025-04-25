@@ -8,7 +8,8 @@
   "options": {},
   "attributes": {
     "descripcion": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 400
     },
     "ejes_estrategicos": {
       "type": "component",
@@ -23,7 +24,8 @@
     "productos": {
       "type": "component",
       "repeatable": true,
-      "component": "evento-sp.producto"
+      "component": "evento-sp.producto",
+      "required": true
     },
     "indicador_evento": {
       "type": "string"
@@ -40,10 +42,12 @@
       "type": "string"
     },
     "perfiles_profesional": {
-      "type": "string"
+      "type": "text",
+      "maxLength": 300
     },
     "perfil_operativo": {
-      "type": "string"
+      "type": "text",
+      "maxLength": 2000
     },
     "proyectos_idsn": {
       "type": "relation",

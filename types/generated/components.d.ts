@@ -76,7 +76,10 @@ export interface EventoSpProducto extends Struct.ComponentSchema {
   };
   attributes: {
     actividades: Schema.Attribute.Component<'evento-sp.actividad', true>;
-    descripcion: Schema.Attribute.Text;
+    descripcion: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
     indicadores: Schema.Attribute.Component<'evento-sp.indicador', true>;
   };
 }
@@ -159,7 +162,10 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
     description: '';
   };
   attributes: {
-    descripcion: Schema.Attribute.Text;
+    descripcion: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 400;
+      }>;
     ejes_estrategicos: Schema.Attribute.Component<
       'evento-sp.eje-estrategico',
       true
@@ -168,7 +174,8 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
       'evento-sp.linea-operativa',
       false
     >;
-    productos: Schema.Attribute.Component<'evento-sp.producto', true>;
+    productos: Schema.Attribute.Component<'evento-sp.producto', true> &
+      Schema.Attribute.Required;
     indicador_evento: Schema.Attribute.String;
     meta_indicador_evento: Schema.Attribute.String;
     territorializacion: Schema.Attribute.Component<
@@ -176,8 +183,14 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
       false
     >;
     equipo: Schema.Attribute.String;
-    perfiles_profesional: Schema.Attribute.String;
-    perfil_operativo: Schema.Attribute.String;
+    perfiles_profesional: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 300;
+      }>;
+    perfil_operativo: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }>;
     proyectos_idsn: Schema.Attribute.Relation<
       'oneToOne',
       'api::proyectos-idsn.proyectos-idsn'

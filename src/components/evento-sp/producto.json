@@ -13,7 +13,8 @@
       "component": "evento-sp.actividad"
     },
     "descripcion": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 600
     },
     "indicadores": {
       "type": "component",
