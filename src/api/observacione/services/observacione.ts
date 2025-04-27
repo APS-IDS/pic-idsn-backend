@@ -12,7 +12,6 @@ export default factories.createCoreService(
       idActividad,
       porcentajeCompletado,
       user,
-      tipo,
       ctx,
       estado,
     }: {
@@ -21,7 +20,6 @@ export default factories.createCoreService(
       idActividad: string;
       porcentajeCompletado: number;
       user: any;
-      tipo: "operador" | "referente";
       ctx: Context;
       estado: string;
     }) {
@@ -29,6 +27,14 @@ export default factories.createCoreService(
 
       if (!anexo) {
         return ctx.notFound("Anexo o actividad no encontrado");
+      }
+
+      const populatedUser = await strapi
+        .documents("plugin::users-permissions.user")
+        .findOne({ documentId: user.documentId, populate: ["custom_role"] });
+
+      if (!populatedUser.custom_role?.documentId) {
+        return ctx.forbidden("No tienes permisos para realizar esta acción");
       }
 
       const fecha = DateTime.now().setZone("America/Bogota").toISO();
@@ -39,7 +45,9 @@ export default factories.createCoreService(
           filters: {
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
-            tipo: tipo,
+            custom_role: {
+              documentId: populatedUser.custom_role.documentId,
+            },
           },
         });
 
@@ -56,7 +64,12 @@ export default factories.createCoreService(
               porcentaje_completado: porcentajeCompletado,
               estado,
               fecha,
-              tipo,
+              custom_role: {
+                documentId: populatedUser.custom_role.documentId,
+              },
+            },
+            populate: {
+              custom_role: true,
             },
           });
 
@@ -74,7 +87,12 @@ export default factories.createCoreService(
             user: { documentId: user.documentId },
             porcentaje_completado: porcentajeCompletado,
             fecha,
-            tipo,
+            custom_role: {
+              documentId: populatedUser.custom_role.documentId,
+            },
+          },
+          populate: {
+            custom_role: true,
           },
         });
 
@@ -95,16 +113,19 @@ export default factories.createCoreService(
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
           },
+          populate: {
+            custom_role: true,
+          },
         });
 
       return {
         operador:
           observaciones.filter(
-            (observacion) => observacion.tipo === "operador"
+            (observacion) => observacion.custom_role.name === "operador"
           )?.[0] || null,
         referente:
           observaciones.filter(
-            (observacion) => observacion.tipo === "referente"
+            (observacion) => observacion.custom_role.name === "referente"
           )?.[0] || null,
       };
     },

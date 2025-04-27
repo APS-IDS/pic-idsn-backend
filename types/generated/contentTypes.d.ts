@@ -478,14 +478,23 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    custom_roles: Schema.Attribute.Relation<
-      'oneToMany',
+    custom_role: Schema.Attribute.Relation<
+      'oneToOne',
       'api::custom-role.custom-role'
     >;
     operador_pic: Schema.Attribute.Relation<
       'oneToOne',
       'api::operador-pic.operador-pic'
     >;
+    primer_nombre: Schema.Attribute.String;
+    segundo_nombre: Schema.Attribute.String;
+    primer_apellido: Schema.Attribute.String;
+    segundo_apellido: Schema.Attribute.String;
+    tipo_documento: Schema.Attribute.String;
+    numero_documento: Schema.Attribute.String;
+    profesion: Schema.Attribute.String;
+    cargo: Schema.Attribute.String;
+    entidad: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -740,7 +749,6 @@ export interface ApiObservacioneObservacione
       'api::anexo-tecnico.anexo-tecnico'
     >;
     id_actividad: Schema.Attribute.String;
-    tipo: Schema.Attribute.Enumeration<['referente', 'operador']>;
     porcentaje_completado: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
         {
@@ -750,6 +758,10 @@ export interface ApiObservacioneObservacione
         number
       >;
     estado: Schema.Attribute.String;
+    custom_role: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::custom-role.custom-role'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

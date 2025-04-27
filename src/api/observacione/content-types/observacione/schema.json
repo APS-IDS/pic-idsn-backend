@@ -31,13 +31,6 @@
     "id_actividad": {
       "type": "string"
     },
-    "tipo": {
-      "type": "enumeration",
-      "enum": [
-        "referente",
-        "operador"
-      ]
-    },
     "porcentaje_completado": {
       "type": "integer",
       "max": 100,
@@ -45,6 +38,11 @@
     },
     "estado": {
       "type": "string"
+    },
+    "custom_role": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::custom-role.custom-role"
     }
   }
 }

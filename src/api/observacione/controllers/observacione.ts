@@ -10,7 +10,6 @@ export default factories.createCoreController(
         observacion,
         anexo_id,
         id_actividad,
-        tipo,
         porcentaje_completado,
         estado,
       } = ctx.request.body;
@@ -24,7 +23,6 @@ export default factories.createCoreController(
           porcentajeCompletado: porcentaje_completado,
           user,
           ctx,
-          tipo,
           estado,
         });
 
