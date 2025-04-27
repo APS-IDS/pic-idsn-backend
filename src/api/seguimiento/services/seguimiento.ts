@@ -62,12 +62,12 @@ export default factories.createCoreService(
     async evidenciaStatus({
       anexoId,
       soporteId,
-      status,
+      statusId,
       ctx,
     }: {
       anexoId: string;
       soporteId: string;
-      status: "cumple" | "no cumple" | "en proceso";
+      statusId: string;
       ctx: Context;
     }) {
       const seguimiento = await this.findSeguimiento(anexoId, soporteId);
@@ -76,10 +76,25 @@ export default factories.createCoreService(
         return ctx.notFound("Anexo or soporte no encontrado");
       }
 
-      return strapi.documents("api::seguimiento.seguimiento").update({
+      const status = await strapi
+        .documents("api::estado-soporte.estado-soporte")
+        .findOne({
+          documentId: statusId,
+        });
+
+      if (!status) {
+        return ctx.notFound("Estado no encontrado");
+      }
+
+      return await strapi.documents("api::seguimiento.seguimiento").update({
         documentId: seguimiento.documentId,
         data: {
-          estado: status,
+          estado_soporte: {
+            connect: [status.documentId],
+          } as any,
+        },
+        populate: {
+          estado_soporte: true,
         },
       });
     },
@@ -204,6 +219,7 @@ export default factories.createCoreService(
             ],
           },
           populate: {
+            estado_soporte: true,
             evidencias: {
               populate: {
                 archivo: true,

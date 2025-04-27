@@ -377,15 +377,18 @@ export default factories.createCoreService(
                           },
                         ],
                       },
+                      populate: {
+                        estado_soporte: true,
+                      },
                     });
 
-                  if (!estadoSoporte?.estado) continue;
+                  if (!estadoSoporte?.estado_soporte?.estado_soporte) continue;
 
-                  if (!result[estadoSoporte.estado]) {
-                    result[estadoSoporte.estado] = 0;
+                  if (!result[estadoSoporte.estado_soporte?.estado_soporte]) {
+                    result[estadoSoporte?.estado_soporte?.estado_soporte] = 0;
                   }
 
-                  result[estadoSoporte.estado]++;
+                  result[estadoSoporte?.estado_soporte?.estado_soporte]++;
                 }
               }
             }
