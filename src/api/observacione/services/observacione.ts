@@ -121,11 +121,12 @@ export default factories.createCoreService(
       return {
         operador:
           observaciones.filter(
-            (observacion) => observacion.custom_role.name === "operador"
+            (observacion) => observacion.custom_role?.name === "operador"
           )?.[0] || null,
         referente:
           observaciones.filter(
-            (observacion) => observacion.custom_role.name === "referente"
+            (observacion) =>
+              observacion.custom_role?.name === "referente_instituto"
           )?.[0] || null,
       };
     },
