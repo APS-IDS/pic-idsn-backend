@@ -478,8 +478,8 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    custom_role: Schema.Attribute.Relation<
-      'oneToOne',
+    custom_roles: Schema.Attribute.Relation<
+      'oneToMany',
       'api::custom-role.custom-role'
     >;
     operador_pic: Schema.Attribute.Relation<

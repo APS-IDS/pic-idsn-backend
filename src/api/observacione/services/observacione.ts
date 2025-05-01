@@ -31,9 +31,9 @@ export default factories.createCoreService(
 
       const populatedUser = await strapi
         .documents("plugin::users-permissions.user")
-        .findOne({ documentId: user.documentId, populate: ["custom_role"] });
+        .findOne({ documentId: user.documentId, populate: ["custom_roles"] });
 
-      if (!populatedUser.custom_role?.documentId) {
+      if (!populatedUser.custom_roles.length) {
         return ctx.forbidden("No tienes permisos para realizar esta acción");
       }
 
@@ -45,9 +45,7 @@ export default factories.createCoreService(
           filters: {
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
-            custom_role: {
-              documentId: populatedUser.custom_role.documentId,
-            },
+            user: { documentId: user.documentId },
           },
         });
 
@@ -65,7 +63,7 @@ export default factories.createCoreService(
               estado,
               fecha,
               custom_role: {
-                documentId: populatedUser.custom_role.documentId,
+                documentId: getRole(populatedUser.custom_roles).documentId,
               },
             },
             populate: {
@@ -88,7 +86,7 @@ export default factories.createCoreService(
             porcentaje_completado: porcentajeCompletado,
             fecha,
             custom_role: {
-              documentId: populatedUser.custom_role.documentId,
+              documentId: getRole(populatedUser.custom_roles).documentId,
             },
           },
           populate: {
@@ -156,3 +154,25 @@ export default factories.createCoreService(
     },
   })
 );
+
+const getRole = (customRoles: CustomRole[]) => {
+  if (!customRoles || customRoles.length === 0) {
+    throw new Error("No custom roles found");
+  }
+
+  if (customRoles.length === 1) {
+    return customRoles[0];
+  }
+
+  const role = customRoles.find((role) => role.name === "referente_instituto");
+  if (role) {
+    return role;
+  }
+
+  throw new Error("Invalid custom role");
+};
+
+interface CustomRole {
+  documentId: string;
+  name?: string;
+}

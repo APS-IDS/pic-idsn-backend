@@ -65,9 +65,9 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "custom_role": {
+    "custom_roles": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::custom-role.custom-role"
     },
     "operador_pic": {
