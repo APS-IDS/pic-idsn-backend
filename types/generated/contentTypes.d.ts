@@ -757,10 +757,17 @@ export interface ApiObservacioneObservacione
         },
         number
       >;
-    estado: Schema.Attribute.String;
     custom_role: Schema.Attribute.Relation<
       'oneToOne',
       'api::custom-role.custom-role'
+    >;
+    estado_operador: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::estado-operador.estado-operador'
+    >;
+    estado_referente: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::estado-referente.estado-referente'
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;

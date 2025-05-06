@@ -13,7 +13,8 @@ export default factories.createCoreService(
       porcentajeCompletado,
       user,
       ctx,
-      estado,
+      estado_operador,
+      estado_referente,
     }: {
       observacion: string;
       anexoId: string;
@@ -21,7 +22,8 @@ export default factories.createCoreService(
       porcentajeCompletado: number;
       user: any;
       ctx: Context;
-      estado: string;
+      estado_operador: string;
+      estado_referente: string;
     }) {
       const anexo = await this.findAnexo(anexoId, idActividad);
 
@@ -33,9 +35,13 @@ export default factories.createCoreService(
         .documents("plugin::users-permissions.user")
         .findOne({ documentId: user.documentId, populate: ["custom_roles"] });
 
-      if (!populatedUser.custom_roles.length) {
+      const rol = getRole(populatedUser.custom_roles);
+
+      if (!rol) {
         return ctx.forbidden("No tienes permisos para realizar esta acción");
       }
+
+      const estados = await this.getStatus(estado_operador, estado_referente);
 
       const fecha = DateTime.now().setZone("America/Bogota").toISO();
 
@@ -60,14 +66,21 @@ export default factories.createCoreService(
               id_actividad: idActividad,
               user: { documentId: user.documentId },
               porcentaje_completado: porcentajeCompletado,
-              estado,
+              estado_operador: {
+                connect: [estados.estadoOperador.documentId],
+              } as any,
+              estado_referente: {
+                connect: [estados.estadoReferente.documentId],
+              } as any,
               fecha,
               custom_role: {
-                documentId: getRole(populatedUser.custom_roles).documentId,
+                documentId: rol.documentId,
               },
             },
             populate: {
               custom_role: true,
+              estado_operador: true,
+              estado_referente: true,
             },
           });
 
@@ -81,20 +94,43 @@ export default factories.createCoreService(
             observacion,
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
-            estado,
+            estado_operador: {
+              connect: [estados.estadoOperador.documentId],
+            } as any,
+            estado_referente: {
+              connect: [estados.estadoReferente.documentId],
+            } as any,
             user: { documentId: user.documentId },
             porcentaje_completado: porcentajeCompletado,
             fecha,
             custom_role: {
-              documentId: getRole(populatedUser.custom_roles).documentId,
+              documentId: rol.documentId,
             },
           },
           populate: {
             custom_role: true,
+            estado_operador: true,
+            estado_referente: true,
           },
         });
 
       return { observacion: createdObservacion, status: "created" };
+    },
+
+    async getStatus(estado_operador, estado_referente) {
+      const estadoOperador = await strapi
+        .documents("api::estado-operador.estado-operador")
+        .findOne({
+          documentId: estado_operador,
+        });
+
+      const estadoReferente = await strapi
+        .documents("api::estado-referente.estado-referente")
+        .findOne({
+          documentId: estado_referente,
+        });
+
+      return { estadoReferente, estadoOperador };
     },
 
     async customFind({
