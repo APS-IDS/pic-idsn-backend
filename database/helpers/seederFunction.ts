@@ -17,6 +17,7 @@ export default async function generate(
         },
       })
       .catch((err) => {
+        console.error("seed error", err);
         // for now we just skip the error
         console.error("seed fail to run", tableName);
       });

@@ -12,24 +12,36 @@ export default factories.createCoreService(
       idActividad,
       porcentajeCompletado,
       user,
-      tipo,
       ctx,
-      estado,
+      estado_operador,
+      estado_referente,
     }: {
       observacion: string;
       anexoId: string;
       idActividad: string;
       porcentajeCompletado: number;
       user: any;
-      tipo: "operador" | "referente";
       ctx: Context;
-      estado: string;
+      estado_operador: string;
+      estado_referente: string;
     }) {
       const anexo = await this.findAnexo(anexoId, idActividad);
 
       if (!anexo) {
         return ctx.notFound("Anexo o actividad no encontrado");
       }
+
+      const populatedUser = await strapi
+        .documents("plugin::users-permissions.user")
+        .findOne({ documentId: user.documentId, populate: ["custom_roles"] });
+
+      const rol = getRole(populatedUser.custom_roles);
+
+      if (!rol) {
+        return ctx.forbidden("No tienes permisos para realizar esta acción");
+      }
+
+      const estados = await this.getStatus(estado_operador, estado_referente);
 
       const fecha = DateTime.now().setZone("America/Bogota").toISO();
 
@@ -39,7 +51,7 @@ export default factories.createCoreService(
           filters: {
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
-            tipo: tipo,
+            user: { documentId: user.documentId },
           },
         });
 
@@ -54,9 +66,21 @@ export default factories.createCoreService(
               id_actividad: idActividad,
               user: { documentId: user.documentId },
               porcentaje_completado: porcentajeCompletado,
-              estado,
+              estado_operador: {
+                connect: [estados.estadoOperador.documentId],
+              } as any,
+              estado_referente: {
+                connect: [estados.estadoReferente.documentId],
+              } as any,
               fecha,
-              tipo,
+              custom_role: {
+                documentId: rol.documentId,
+              },
+            },
+            populate: {
+              custom_role: true,
+              estado_operador: true,
+              estado_referente: true,
             },
           });
 
@@ -70,15 +94,43 @@ export default factories.createCoreService(
             observacion,
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
-            estado,
+            estado_operador: {
+              connect: [estados.estadoOperador.documentId],
+            } as any,
+            estado_referente: {
+              connect: [estados.estadoReferente.documentId],
+            } as any,
             user: { documentId: user.documentId },
             porcentaje_completado: porcentajeCompletado,
             fecha,
-            tipo,
+            custom_role: {
+              documentId: rol.documentId,
+            },
+          },
+          populate: {
+            custom_role: true,
+            estado_operador: true,
+            estado_referente: true,
           },
         });
 
       return { observacion: createdObservacion, status: "created" };
+    },
+
+    async getStatus(estado_operador, estado_referente) {
+      const estadoOperador = await strapi
+        .documents("api::estado-operador.estado-operador")
+        .findOne({
+          documentId: estado_operador,
+        });
+
+      const estadoReferente = await strapi
+        .documents("api::estado-referente.estado-referente")
+        .findOne({
+          documentId: estado_referente,
+        });
+
+      return { estadoReferente, estadoOperador };
     },
 
     async customFind({
@@ -95,16 +147,20 @@ export default factories.createCoreService(
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
           },
+          populate: {
+            custom_role: true,
+          },
         });
 
       return {
         operador:
           observaciones.filter(
-            (observacion) => observacion.tipo === "operador"
+            (observacion) => observacion.custom_role?.name === "operador"
           )?.[0] || null,
         referente:
           observaciones.filter(
-            (observacion) => observacion.tipo === "referente"
+            (observacion) =>
+              observacion.custom_role?.name === "referente_instituto"
           )?.[0] || null,
       };
     },
@@ -134,3 +190,25 @@ export default factories.createCoreService(
     },
   })
 );
+
+const getRole = (customRoles: CustomRole[]) => {
+  if (!customRoles || customRoles.length === 0) {
+    throw new Error("No custom roles found");
+  }
+
+  if (customRoles.length === 1) {
+    return customRoles[0];
+  }
+
+  const role = customRoles.find((role) => role.name === "referente_instituto");
+  if (role) {
+    return role;
+  }
+
+  throw new Error("Invalid custom role");
+};
+
+interface CustomRole {
+  documentId: string;
+  name?: string;
+}

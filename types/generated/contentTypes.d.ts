@@ -486,6 +486,15 @@ export interface PluginUsersPermissionsUser
       'oneToOne',
       'api::operador-pic.operador-pic'
     >;
+    primer_nombre: Schema.Attribute.String;
+    segundo_nombre: Schema.Attribute.String;
+    primer_apellido: Schema.Attribute.String;
+    segundo_apellido: Schema.Attribute.String;
+    tipo_documento: Schema.Attribute.String;
+    numero_documento: Schema.Attribute.String;
+    profesion: Schema.Attribute.String;
+    cargo: Schema.Attribute.String;
+    entidad: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -556,6 +565,97 @@ export interface ApiCustomRoleCustomRole extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::custom-role.custom-role'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEstadoOperadorEstadoOperador
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'estado_operadors';
+  info: {
+    singularName: 'estado-operador';
+    pluralName: 'estado-operadors';
+    displayName: 'Estado Operador';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    estado_actividad: Schema.Attribute.String;
+    descripcion_estado: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::estado-operador.estado-operador'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEstadoReferenteEstadoReferente
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'estado_referentes';
+  info: {
+    singularName: 'estado-referente';
+    pluralName: 'estado-referentes';
+    displayName: 'Estado Referente';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    estado_actividad: Schema.Attribute.String;
+    descripcion_estado: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::estado-referente.estado-referente'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEstadoSoporteEstadoSoporte
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'estado_soportes';
+  info: {
+    singularName: 'estado-soporte';
+    pluralName: 'estado-soportes';
+    displayName: 'Estado Soporte';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    estado_soporte: Schema.Attribute.String;
+    descripcion_soporte: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::estado-soporte.estado-soporte'
     > &
       Schema.Attribute.Private;
   };
@@ -649,7 +749,6 @@ export interface ApiObservacioneObservacione
       'api::anexo-tecnico.anexo-tecnico'
     >;
     id_actividad: Schema.Attribute.String;
-    tipo: Schema.Attribute.Enumeration<['referente', 'operador']>;
     porcentaje_completado: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
         {
@@ -658,7 +757,18 @@ export interface ApiObservacioneObservacione
         },
         number
       >;
-    estado: Schema.Attribute.String;
+    custom_role: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::custom-role.custom-role'
+    >;
+    estado_operador: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::estado-operador.estado-operador'
+    >;
+    estado_referente: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::estado-referente.estado-referente'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -790,7 +900,10 @@ export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
       'api::evidencia.evidencia'
     >;
     soporte_id: Schema.Attribute.String;
-    estado: Schema.Attribute.Enumeration<['cumple', 'no cumple', 'en proceso']>;
+    estado_soporte: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::estado-soporte.estado-soporte'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -802,6 +915,35 @@ export interface ApiSeguimientoSeguimiento extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::seguimiento.seguimiento'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTipoSoporteTipoSoporte extends Struct.CollectionTypeSchema {
+  collectionName: 'tipo_soportes';
+  info: {
+    singularName: 'tipo-soporte';
+    pluralName: 'tipo-soportes';
+    displayName: 'Tipo Soporte';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    tipo_soporte: Schema.Attribute.String;
+    descripcion: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tipo-soporte.tipo-soporte'
     > &
       Schema.Attribute.Private;
   };
@@ -1191,6 +1333,9 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::anexo-tecnico.anexo-tecnico': ApiAnexoTecnicoAnexoTecnico;
       'api::custom-role.custom-role': ApiCustomRoleCustomRole;
+      'api::estado-operador.estado-operador': ApiEstadoOperadorEstadoOperador;
+      'api::estado-referente.estado-referente': ApiEstadoReferenteEstadoReferente;
+      'api::estado-soporte.estado-soporte': ApiEstadoSoporteEstadoSoporte;
       'api::evidencia.evidencia': ApiEvidenciaEvidencia;
       'api::municipio.municipio': ApiMunicipioMunicipio;
       'api::observacione.observacione': ApiObservacioneObservacione;
@@ -1198,6 +1343,7 @@ declare module '@strapi/strapi' {
       'api::proyectos-idsn.proyectos-idsn': ApiProyectosIdsnProyectosIdsn;
       'api::seeded-data.seeded-data': ApiSeededDataSeededData;
       'api::seguimiento.seguimiento': ApiSeguimientoSeguimiento;
+      'api::tipo-soporte.tipo-soporte': ApiTipoSoporteTipoSoporte;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

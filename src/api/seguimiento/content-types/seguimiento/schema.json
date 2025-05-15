@@ -33,13 +33,10 @@
     "soporte_id": {
       "type": "string"
     },
-    "estado": {
-      "type": "enumeration",
-      "enum": [
-        "cumple",
-        "no cumple",
-        "en proceso"
-      ]
+    "estado_soporte": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::estado-soporte.estado-soporte"
     }
   }
 }

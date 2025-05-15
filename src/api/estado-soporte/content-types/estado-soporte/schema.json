@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "estado_soportes",
+  "info": {
+    "singularName": "estado-soporte",
+    "pluralName": "estado-soportes",
+    "displayName": "Estado Soporte"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "estado_soporte": {
+      "type": "string"
+    },
+    "descripcion_soporte": {
+      "type": "text"
+    }
+  }
+}

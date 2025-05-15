@@ -10,9 +10,9 @@ export default factories.createCoreController(
         observacion,
         anexo_id,
         id_actividad,
-        tipo,
         porcentaje_completado,
-        estado,
+        estado_operador,
+        estado_referente,
       } = ctx.request.body;
 
       const result = await strapi
@@ -24,8 +24,8 @@ export default factories.createCoreController(
           porcentajeCompletado: porcentaje_completado,
           user,
           ctx,
-          tipo,
-          estado,
+          estado_operador,
+          estado_referente,
         });
 
       return result;

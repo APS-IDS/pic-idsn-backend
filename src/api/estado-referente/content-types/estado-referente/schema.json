@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "estado_referentes",
+  "info": {
+    "singularName": "estado-referente",
+    "pluralName": "estado-referentes",
+    "displayName": "Estado Referente"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "estado_actividad": {
+      "type": "string"
+    },
+    "descripcion_estado": {
+      "type": "text"
+    }
+  }
+}

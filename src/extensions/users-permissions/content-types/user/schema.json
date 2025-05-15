@@ -74,6 +74,33 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::operador-pic.operador-pic"
+    },
+    "primer_nombre": {
+      "type": "string"
+    },
+    "segundo_nombre": {
+      "type": "string"
+    },
+    "primer_apellido": {
+      "type": "string"
+    },
+    "segundo_apellido": {
+      "type": "string"
+    },
+    "tipo_documento": {
+      "type": "string"
+    },
+    "numero_documento": {
+      "type": "string"
+    },
+    "profesion": {
+      "type": "string"
+    },
+    "cargo": {
+      "type": "string"
+    },
+    "entidad": {
+      "type": "string"
     }
   }
 }

@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tipo_soportes",
+  "info": {
+    "singularName": "tipo-soporte",
+    "pluralName": "tipo-soportes",
+    "displayName": "Tipo Soporte"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tipo_soporte": {
+      "type": "string"
+    },
+    "descripcion": {
+      "type": "text"
+    }
+  }
+}
