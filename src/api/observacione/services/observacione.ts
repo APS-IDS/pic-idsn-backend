@@ -55,23 +55,37 @@ export default factories.createCoreService(
           },
         });
 
+      const stadosData = {
+        ...(estados.estadoOperador?.documentId
+          ? {
+              estado_operador: {
+                connect: [estados.estadoOperador.documentId],
+              } as any,
+            }
+          : {}),
+        ...(estados.estadoReferente?.documentId
+          ? {
+              estado_referente: {
+                connect: [estados.estadoReferente.documentId],
+              } as any,
+            }
+          : {}),
+      };
+
+      console.log("stadosData", stadosData);
+
       if (observacionRecord) {
         const updatedObservacion = await strapi
           .documents("api::observacione.observacione")
           .update({
             documentId: observacionRecord.documentId,
             data: {
+              ...stadosData,
               observacion,
               anexo_tecnico: { documentId: anexoId },
               id_actividad: idActividad,
               user: { documentId: user.documentId },
               porcentaje_completado: porcentajeCompletado,
-              estado_operador: {
-                connect: [estados.estadoOperador.documentId],
-              } as any,
-              estado_referente: {
-                connect: [estados.estadoReferente.documentId],
-              } as any,
               fecha,
               custom_role: {
                 documentId: rol.documentId,
@@ -83,6 +97,7 @@ export default factories.createCoreService(
               estado_referente: true,
             },
           });
+        console.log("updatedObservacion", updatedObservacion);
 
         return { observacion: updatedObservacion, status: "updated" };
       }
@@ -91,15 +106,10 @@ export default factories.createCoreService(
         .documents("api::observacione.observacione")
         .create({
           data: {
+            ...stadosData,
             observacion,
             anexo_tecnico: { documentId: anexoId },
             id_actividad: idActividad,
-            estado_operador: {
-              connect: [estados.estadoOperador.documentId],
-            } as any,
-            estado_referente: {
-              connect: [estados.estadoReferente.documentId],
-            } as any,
             user: { documentId: user.documentId },
             porcentaje_completado: porcentajeCompletado,
             fecha,
@@ -149,6 +159,13 @@ export default factories.createCoreService(
           },
           populate: {
             custom_role: true,
+            estado_operador: true,
+            estado_referente: true,
+            user: {
+              populate: {
+                custom_roles: true,
+              },
+            },
           },
         });
 
