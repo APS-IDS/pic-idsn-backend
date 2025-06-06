@@ -8,7 +8,7 @@ export default async function generate(
   //TODO: discuss validations when table is not found, or error when trying to seed the table.
   const entries = await strapi.entityService.findMany(tableName);
 
-  data.forEach(async (element) => {
+  for (const element of data) {
     await strapi.entityService
       .create(tableName, {
         data: {
@@ -21,5 +21,5 @@ export default async function generate(
         // for now we just skip the error
         console.error("seed fail to run", tableName);
       });
-  });
+  }
 }
