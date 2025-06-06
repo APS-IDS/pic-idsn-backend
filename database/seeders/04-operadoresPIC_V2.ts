@@ -2,7 +2,7 @@ export const tableName = "api::operador-pic.operador-pic";
 
 export const data = [
   {
-    nit: "0",
+    nit: null,
     operador_pic: "Por definir",
     departamento: "SIN ESPECIFICAR",
     municipio: "SIN ESPECIFICAR",

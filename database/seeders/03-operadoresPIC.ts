@@ -424,13 +424,13 @@ export const data = [
     municipio: "PASTO",
   },
   {
-    nit: "0",
+    nit: null,
     operador_pic: "Fundación",
     departamento: "DEPARTAMENTO DE NARIÑO",
     municipio: "SIN ESPECIFICAR",
   },
   {
-    nit: "0",
+    nit: null,
     operador_pic: "Otro",
     departamento: "DEPARTAMENTO DE NARIÑO",
     municipio: "SIN ESPECIFICAR",

@@ -791,6 +791,7 @@ export interface ApiOperadorPicOperadorPic extends Struct.CollectionTypeSchema {
     singularName: 'operador-pic';
     pluralName: 'operador-pics';
     displayName: 'Operador pic';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -800,6 +801,7 @@ export interface ApiOperadorPicOperadorPic extends Struct.CollectionTypeSchema {
     operador_pic: Schema.Attribute.String;
     departamento: Schema.Attribute.String;
     municipio: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<'operador_pic'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
