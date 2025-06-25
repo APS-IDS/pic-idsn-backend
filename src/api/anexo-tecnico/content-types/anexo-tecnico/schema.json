@@ -14,8 +14,8 @@
   "attributes": {
     "eventos": {
       "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.evento"
+      "component": "evento-sp.evento",
+      "repeatable": true
     }
   }
 }

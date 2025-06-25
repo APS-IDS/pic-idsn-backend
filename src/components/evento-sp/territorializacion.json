@@ -11,10 +11,12 @@
       "type": "integer"
     },
     "territorio": {
-      "type": "string"
+      "type": "text",
+      "maxLength": 600
     },
     "microterritorio": {
-      "type": "string"
+      "type": "text",
+      "maxLength": 600
     },
     "municipios": {
       "type": "relation",

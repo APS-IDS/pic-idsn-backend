@@ -8,44 +8,45 @@
   "options": {},
   "attributes": {
     "descripcion": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 600
     },
     "cantidad_a_ejecutar": {
       "type": "string"
     },
     "entornos": {
       "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.entorno"
+      "component": "evento-sp.entorno",
+      "repeatable": true
     },
     "tecnologias": {
       "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.tecnologia"
+      "component": "evento-sp.tecnologia",
+      "repeatable": true
     },
     "poblaciones": {
       "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.poblacion-sujeto"
+      "component": "evento-sp.poblacion-sujeto",
+      "repeatable": true
     },
     "unidad_medida": {
       "type": "string"
     },
     "cups": {
       "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.cups"
+      "component": "evento-sp.cups",
+      "repeatable": false
     },
     "valor_unitario": {
-      "type": "decimal"
+      "type": "float"
     },
     "valor_total": {
-      "type": "decimal"
+      "type": "float"
     },
     "soportes": {
       "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.soporte"
+      "component": "evento-sp.soporte",
+      "repeatable": true
     },
     "cronograma": {
       "type": "json"

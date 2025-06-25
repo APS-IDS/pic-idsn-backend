@@ -11,15 +11,18 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     cantidad_a_ejecutar: Schema.Attribute.String;
     cronograma: Schema.Attribute.JSON;
     cups: Schema.Attribute.Component<'evento-sp.cups', false>;
-    descripcion: Schema.Attribute.Text;
+    descripcion: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
     entornos: Schema.Attribute.Component<'evento-sp.entorno', true>;
     poblaciones: Schema.Attribute.Component<'evento-sp.poblacion-sujeto', true>;
     soportes: Schema.Attribute.Component<'evento-sp.soporte', true>;
     tecnologias: Schema.Attribute.Component<'evento-sp.tecnologia', true>;
     unidad_medida: Schema.Attribute.String;
     uuid: Schema.Attribute.String;
-    valor_total: Schema.Attribute.Decimal;
-    valor_unitario: Schema.Attribute.Decimal;
+    valor_total: Schema.Attribute.Float;
+    valor_unitario: Schema.Attribute.Float;
   };
 }
 
@@ -249,13 +252,19 @@ export interface EventoSpTerritorializacion extends Struct.ComponentSchema {
     icon: 'command';
   };
   attributes: {
-    microterritorio: Schema.Attribute.String;
+    microterritorio: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
     municipios: Schema.Attribute.Relation<
       'oneToMany',
       'api::municipio.municipio'
     >;
     numero_hogares: Schema.Attribute.Integer;
-    territorio: Schema.Attribute.String;
+    territorio: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
   };
 }
 
