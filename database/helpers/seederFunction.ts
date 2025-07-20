@@ -9,11 +9,14 @@ export default async function generate(
   const entries = await strapi.entityService.findMany(tableName);
 
   for (const element of data) {
+    await new Promise((resolve) => {
+      setTimeout(resolve, 500);
+    });
+
     await strapi.entityService
       .create(tableName, {
         data: {
           ...element,
-          publishedAt: new Date(),
         },
       })
       .catch((err) => {
