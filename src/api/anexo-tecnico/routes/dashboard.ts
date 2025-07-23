@@ -45,5 +45,10 @@ export default {
       path: "/dashboard-all",
       handler: "anexo-tecnico.dasboardAll",
     },
+    {
+      method: "GET",
+      path: "/actividades-por-estado",
+      handler: "anexo-tecnico.actividadesPorEstado",
+    },
   ],
 };

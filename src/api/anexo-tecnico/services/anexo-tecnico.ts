@@ -401,6 +401,77 @@ export default factories.createCoreService(
         throw new Error("Error fetching actividades tecnologia");
       }
     },
+    async actividadesPorEstado() {
+      try {
+        const anexosTecnicos = await strapi
+          .documents("api::anexo-tecnico.anexo-tecnico")
+          .findMany({
+            pageSize: 100,
+            page: 1,
+            populate: {
+              eventos: {
+                populate: {
+                  productos: {
+                    populate: {
+                      actividades: {
+                        populate: {
+                          soportes: true,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          });
+
+        const result = {};
+
+        for (let i = 0; i < anexosTecnicos.length; i++) {
+          const anexo = anexosTecnicos[i];
+          for (let j = 0; j < anexo.eventos.length; j++) {
+            const evento = anexo.eventos[j];
+            for (let k = 0; k < evento.productos.length; k++) {
+              const producto = evento.productos[k];
+              for (let l = 0; l < producto.actividades.length; l++) {
+                const actividad = producto.actividades[l];
+
+                const observacion = await strapi
+                  .documents("api::observacione.observacione")
+                  .findFirst({
+                    filters: {
+                      $and: [
+                        { id_actividad: actividad.uuid },
+                        {
+                          anexo_tecnico: {
+                            documentId: anexo.documentId,
+                          },
+                        },
+                      ],
+                    },
+                    populate: {
+                      estado_referente: true,
+                    },
+                  });
+
+                if (!observacion?.estado_referente) continue;
+
+                if (!result[observacion.estado_referente.estado_actividad]) {
+                  result[observacion.estado_referente.estado_actividad] = 0;
+                }
+
+                result[observacion.estado_referente.estado_actividad]++;
+              }
+            }
+          }
+        }
+
+        return { result };
+      } catch (error) {
+        strapi.log.error("Error :", error);
+        throw new Error(error.message);
+      }
+    },
     async getMunicipios() {
       return strapi.documents("api::municipio.municipio").findMany({
         page: 1,

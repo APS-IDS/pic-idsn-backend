@@ -68,6 +68,13 @@ export default factories.createCoreController(
 
       return result;
     },
+    async actividadesPorEstado(ctx) {
+      const result = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .actividadesPorEstado();
+
+      return result;
+    },
     async dasboardAll(ctx) {
       const municipiosEventos = await strapi
         .service("api::anexo-tecnico.anexo-tecnico")
@@ -101,6 +108,10 @@ export default factories.createCoreController(
         .service("api::anexo-tecnico.anexo-tecnico")
         .soportesEstado();
 
+      const actividadesPorEstado = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .actividadesPorEstado();
+
       const result = {
         municipiosEventos,
         productosProyecto,
@@ -110,6 +121,7 @@ export default factories.createCoreController(
         actividadesPoblacion,
         actividadesMes,
         soportesEstado,
+        actividadesPorEstado,
       };
 
       return result;
