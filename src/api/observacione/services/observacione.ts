@@ -72,8 +72,6 @@ export default factories.createCoreService(
           : {}),
       };
 
-      console.log("stadosData", stadosData);
-
       if (observacionRecord) {
         const updatedObservacion = await strapi
           .documents("api::observacione.observacione")
@@ -97,7 +95,6 @@ export default factories.createCoreService(
               estado_referente: true,
             },
           });
-        console.log("updatedObservacion", updatedObservacion);
 
         return { observacion: updatedObservacion, status: "updated" };
       }
