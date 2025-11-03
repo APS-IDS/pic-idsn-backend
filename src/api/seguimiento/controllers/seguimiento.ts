@@ -24,6 +24,14 @@ export default factories.createCoreController(
 
       return result;
     },
+    async getFile(ctx: Context) {
+      const evidenciaId = ctx.params.id;
+
+      await strapi.service("api::seguimiento.seguimiento").getFile({
+        evidenciaId,
+        ctx,
+      });
+    },
     async evidenciaStatus(ctx: Context) {
       const { anexo_id, soporte_id, status_id } = ctx.request.body;
 

@@ -17,14 +17,24 @@
       "target": "api::municipio.municipio"
     },
     "archivo": {
+      "type": "media",
+      "multiple": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "file_string": {
+      "type": "text",
+      "private": true
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "fileMimeType": {
+      "type": "string"
     }
   }
 }

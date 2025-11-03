@@ -15,5 +15,10 @@ export default {
       path: "/seguimiento/remove-file",
       handler: "seguimiento.removeFile",
     },
+    {
+      method: "GET",
+      path: "/seguimiento/get-file/:id",
+      handler: "seguimiento.getFile",
+    },
   ],
 };

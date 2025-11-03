@@ -538,6 +538,9 @@ export interface ApiEvidenciaEvidencia extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    file_name: Schema.Attribute.String;
+    file_string: Schema.Attribute.Text & Schema.Attribute.Private;
+    fileMimeType: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

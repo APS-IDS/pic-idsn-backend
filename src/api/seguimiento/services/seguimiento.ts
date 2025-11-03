@@ -1,5 +1,7 @@
 import { factories } from "@strapi/strapi";
 import { Context } from "koa";
+import fs from "fs/promises";
+import { File } from "formidable";
 
 export default factories.createCoreService(
   "api::seguimiento.seguimiento",
@@ -35,11 +37,9 @@ export default factories.createCoreService(
           return ctx.badRequest("Municipio no encontrado");
         }
 
-        const uploadedFile = await this.uploadFiles(files);
-        const evidencia = await this.createEvidencia(
-          municipio_id,
-          uploadedFile
-        );
+        // const uploadedFile = await this.uploadFiles(files);
+
+        const evidencia = await this.createEvidencia(municipio_id, files);
 
         const seguimiento = await this.findSeguimiento(anexo_id, soporte_id);
 
@@ -57,6 +57,27 @@ export default factories.createCoreService(
         strapi.log.error("Error uploading file:", error);
         return ctx.internalServerError(error.message);
       }
+    },
+
+    async getFile({ evidenciaId, ctx }: { evidenciaId: string; ctx: Context }) {
+      const evidencia = await strapi
+        .documents("api::evidencia.evidencia")
+        .findOne({
+          documentId: evidenciaId,
+        });
+
+      if (!evidencia) {
+        return ctx.notFound("Evidencia no encontrada");
+      }
+
+      const buffer = Buffer.from(evidencia.file_string, "base64");
+
+      ctx.body = buffer;
+      ctx.set({
+        "Content-Type": evidencia.fileMimeType,
+        "Content-Disposition": `attachment; filename="${evidencia.file_name}"`,
+      });
+      ctx.status = 200;
     },
 
     async evidenciaStatus({
@@ -143,11 +164,18 @@ export default factories.createCoreService(
       });
     },
 
-    async createEvidencia(municipio_id: string, uploadedFile: any) {
+    async createEvidencia(municipio_id: string, files: File) {
+      const base64Data = await fs.readFile(files.filepath, {
+        encoding: "base64",
+      });
+
       return strapi.documents("api::evidencia.evidencia").create({
         data: {
           municipio: { documentId: municipio_id },
-          archivo: uploadedFile,
+          // archivo: uploadedFile,
+          file_string: base64Data,
+          file_name: files.originalFilename,
+          fileMimeType: files.mimetype,
         },
       });
     },
