@@ -22,7 +22,8 @@ export default factories.createCoreController(
           files,
         });
 
-      return result;
+      const sanitizedResults = await this.sanitizeOutput(result, ctx);
+      return sanitizedResults;
     },
     async getFile(ctx: Context) {
       const evidenciaId = ctx.params.id;
@@ -44,7 +45,8 @@ export default factories.createCoreController(
           ctx,
         });
 
-      return result;
+      const sanitizedResults = await this.sanitizeOutput(result, ctx);
+      return sanitizedResults;
     },
     async checkSeguimiento(ctx: Context) {
       const { anexo_id, soporte_id } = ctx.request.query;
@@ -56,7 +58,8 @@ export default factories.createCoreController(
           soporteId: soporte_id,
         });
 
-      return result;
+      const sanitizedResults = await this.sanitizeOutput(result, ctx);
+      return sanitizedResults;
     },
     async removeFile(ctx: Context) {
       const { anexo_id, soporte_id, evidencia_id } = ctx.request.body;
@@ -70,7 +73,8 @@ export default factories.createCoreController(
           ctx,
         });
 
-      return result;
+      const sanitizedResults = await this.sanitizeOutput(result, ctx);
+      return sanitizedResults;
     },
   })
 );

@@ -295,13 +295,13 @@ export default factories.createCoreService(
 
       const evidenciaToDelete = seguimiento.evidencias[index];
 
-      const file = await strapi
-        .service("plugin::upload.upload")
-        .findOne(evidenciaToDelete.archivo.id);
+      // const file = await strapi
+      //   .service("plugin::upload.upload")
+      //   .findOne(evidenciaToDelete.archivo.id);
 
-      if (!file) {
-        return ctx.badRequest("Archivo no encontrado");
-      }
+      // if (!file) {
+      //   return ctx.badRequest("Archivo no encontrado");
+      // }
 
       evidencias.splice(index, 1);
 
@@ -323,13 +323,13 @@ export default factories.createCoreService(
             documentId: evidenciaToDelete.documentId,
           });
 
-        const fileResult = await strapi
-          .service("plugin::upload.upload")
-          .remove(file);
+        // const fileResult = await strapi
+        //   .service("plugin::upload.upload")
+        //   .remove(file);
 
         return {
           seguimiento: seguimientoResult,
-          file: fileResult,
+          // file: fileResult,
           evidencia: evidenciaResult,
         };
       } catch (error) {
