@@ -88,7 +88,10 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
       true
     >;
     equipo: Schema.Attribute.String;
-    indicador_evento: Schema.Attribute.String;
+    indicador_evento: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 400;
+      }>;
     lineas_operativa: Schema.Attribute.Component<
       'evento-sp.linea-operativa',
       false
@@ -129,7 +132,10 @@ export interface EventoSpIndicador extends Struct.ComponentSchema {
   attributes: {
     cantidad: Schema.Attribute.Integer;
     indicador_linea_base: Schema.Attribute.String;
-    meta_producto: Schema.Attribute.String;
+    meta_producto: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 400;
+      }>;
   };
 }
 

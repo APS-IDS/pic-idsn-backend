@@ -13,30 +13,31 @@
     },
     "ejes_estrategicos": {
       "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.eje-estrategico"
+      "component": "evento-sp.eje-estrategico",
+      "repeatable": true
     },
     "lineas_operativa": {
       "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.linea-operativa"
+      "component": "evento-sp.linea-operativa",
+      "repeatable": false
     },
     "productos": {
       "type": "component",
-      "repeatable": true,
       "component": "evento-sp.producto",
+      "repeatable": true,
       "required": true
     },
     "indicador_evento": {
-      "type": "string"
+      "type": "text",
+      "maxLength": 400
     },
     "meta_indicador_evento": {
       "type": "string"
     },
     "territorializacion": {
       "type": "component",
-      "repeatable": false,
-      "component": "evento-sp.territorializacion"
+      "component": "evento-sp.territorializacion",
+      "repeatable": false
     },
     "equipo": {
       "type": "string"

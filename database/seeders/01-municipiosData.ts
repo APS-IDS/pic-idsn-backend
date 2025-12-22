@@ -309,9 +309,9 @@ export const data = [
   },
   {
     nodo: "SUR",
-    nombre_municipio: "CUASPUD",
+    nombre_municipio: "CUASPUD CARLOSAMA",
     codigo: "52210",
-    label: "CUASPUD (SUR)",
+    label: "CUASPUD CARLOSAMA (SUR)",
   },
   {
     nodo: "SUR",

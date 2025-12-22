@@ -117,7 +117,7 @@ export const data = [
   },
   {
     nit: "814006620:7",
-    operador_pic: "E.S.E. Centro de Salud de Linares  LINARES",
+    operador_pic: "E.S.E. Centro de Salud Juan Pablo II  LINARES",
     departamento: "DEPARTAMENTO DE NARIÑO",
     municipio: "LINARES",
   },
