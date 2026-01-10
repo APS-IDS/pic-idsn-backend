@@ -386,6 +386,8 @@ export interface ApiAnexoTecnicoAnexoTecnico
     draftAndPublish: false;
   };
   attributes: {
+    anexo_tecnico_date: Schema.Attribute.Date &
+      Schema.Attribute.DefaultTo<'2025-01-01'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

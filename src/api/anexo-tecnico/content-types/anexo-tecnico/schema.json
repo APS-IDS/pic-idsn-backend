@@ -12,6 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "anexo_tecnico_date": {
+      "type": "date",
+      "required": false,
+      "default": "2025-01-01"
+    },
     "eventos": {
       "type": "component",
       "component": "evento-sp.evento",
