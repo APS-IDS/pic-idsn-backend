@@ -13,7 +13,7 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     cups: Schema.Attribute.Component<'evento-sp.cups', false>;
     descripcion: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 600;
+        maxLength: 2000;
       }>;
     entornos: Schema.Attribute.Component<'evento-sp.entorno', true>;
     poblaciones: Schema.Attribute.Component<'evento-sp.poblacion-sujeto', true>;

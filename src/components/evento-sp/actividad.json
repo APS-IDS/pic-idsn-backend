@@ -9,7 +9,7 @@
   "attributes": {
     "descripcion": {
       "type": "text",
-      "maxLength": 600
+      "maxLength": 2000
     },
     "cantidad_a_ejecutar": {
       "type": "string"
