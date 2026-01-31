@@ -96,7 +96,10 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
       'evento-sp.linea-operativa',
       false
     >;
-    meta_indicador_evento: Schema.Attribute.String;
+    meta_indicador_evento: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }>;
     operador_pic: Schema.Attribute.Relation<
       'oneToOne',
       'api::operador-pic.operador-pic'

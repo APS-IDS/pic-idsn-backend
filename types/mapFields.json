@@ -1,0 +1,82 @@
+{
+  "data": {
+    "eventos": [
+      {
+        "operador_pic": {
+          "connect": [{ "documentId": "re62xb7coov5snfrcci5d6k9" }]
+        },
+        "equipo": "Equipos básicos en salud",
+        "perfiles_profesional": "Perfil Profesional",
+        "perfil_operativo": "Perfil Operativo",
+        "territorializacion": {
+          "numero_hogares": "1",
+          "municipios": {
+            "connect": [{ "documentId": "w3uyipmlrska244ghlo130b1" }]
+          },
+          "territorio": "Código - Nombre de Territorio APS",
+          "microterritorio": "Código Micro-Territorio"
+        },
+        "descripcion": "Descripción Evento",
+        "indicador_evento": "Nombre del Indicador",
+        "meta_indicador_evento": "Meta Indicador",
+        "ejes_estrategicos": [
+          { "nombre": "Gobernabilidad y gobernanza de la salud pública " }
+        ],
+        "lineas_operativa": {
+          "nombre": "Cuidado de la salud en el territorio"
+        },
+        "productos": [
+          {
+            "descripcion": "Descripción del Producto",
+            "actividades": [
+              {
+                "descripcion": "Descripción Actividad",
+                "cantidad_a_ejecutar": "2",
+                "unidad_medida": "Unidad de Medida",
+                "valor_unitario": "2.00",
+                "valor_total": "2.00",
+                "entornos": [{ "nombre": "Comunitario" }],
+                "tecnologias": [{ "nombre": "Información en salud" }],
+                "poblaciones": [{ "nombre": "Familias" }],
+                "cups": {
+                  "codigo": "I10001 INFORMACIÓN EN SALUD PARA EL CUIDADO DEL AMBIENTE"
+                },
+                "soportes": [
+                  {
+                    "tipo": "Acta de Reunión",
+                    "descripcion": "Descripción Soporte",
+                    "cantidad": "1"
+                  }
+                ],
+                "cronograma": [
+                  { "Ene": 5 },
+                  { "Feb": 0 },
+                  { "Mar": 0 },
+                  { "Abr": 0 },
+                  { "May": 0 },
+                  { "Jun": 0 },
+                  { "Jul": 0 },
+                  { "Ago": 0 },
+                  { "Sept": 0 },
+                  { "Oct": 0 },
+                  { "Nov": 0 },
+                  { "Dic": 0 }
+                ]
+              }
+            ],
+            "indicadores": [
+              {
+                "meta_producto": "Indicador de producto",
+                "cantidad": "1",
+                "indicador_linea_base": "Indicador line abase"
+              }
+            ]
+          }
+        ],
+        "proyectos_idsn": {
+          "connect": [{ "documentId": "gf50ktfohwbxxzs3d9d98xxx" }]
+        }
+      }
+    ]
+  }
+}

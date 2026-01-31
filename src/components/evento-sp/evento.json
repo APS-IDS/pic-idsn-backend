@@ -32,7 +32,8 @@
       "maxLength": 400
     },
     "meta_indicador_evento": {
-      "type": "string"
+      "type": "text",
+      "maxLength": 2000
     },
     "territorializacion": {
       "type": "component",
