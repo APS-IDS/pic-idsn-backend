@@ -9,7 +9,7 @@
   "attributes": {
     "descripcion": {
       "type": "text",
-      "maxLength": 400
+      "maxLength": 2000
     },
     "ejes_estrategicos": {
       "type": "component",
@@ -29,7 +29,7 @@
     },
     "indicador_evento": {
       "type": "text",
-      "maxLength": 400
+      "maxLength": 2000
     },
     "meta_indicador_evento": {
       "type": "text",
@@ -41,11 +41,11 @@
       "repeatable": false
     },
     "equipo": {
-      "type": "string"
+      "type": "text"
     },
     "perfiles_profesional": {
       "type": "text",
-      "maxLength": 300
+      "maxLength": 2000
     },
     "perfil_operativo": {
       "type": "text",

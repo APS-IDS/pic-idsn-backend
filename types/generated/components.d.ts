@@ -8,7 +8,7 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     icon: 'walk';
   };
   attributes: {
-    cantidad_a_ejecutar: Schema.Attribute.String;
+    cantidad_a_ejecutar: Schema.Attribute.Text;
     cronograma: Schema.Attribute.JSON;
     cups: Schema.Attribute.Component<'evento-sp.cups', false>;
     descripcion: Schema.Attribute.Text &
@@ -19,7 +19,7 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     poblaciones: Schema.Attribute.Component<'evento-sp.poblacion-sujeto', true>;
     soportes: Schema.Attribute.Component<'evento-sp.soporte', true>;
     tecnologias: Schema.Attribute.Component<'evento-sp.tecnologia', true>;
-    unidad_medida: Schema.Attribute.String;
+    unidad_medida: Schema.Attribute.Text;
     uuid: Schema.Attribute.String;
     valor_total: Schema.Attribute.Float;
     valor_unitario: Schema.Attribute.Float;
@@ -45,7 +45,7 @@ export interface EventoSpEjeEstrategico extends Struct.ComponentSchema {
     icon: 'briefcase';
   };
   attributes: {
-    nombre: Schema.Attribute.String;
+    nombre: Schema.Attribute.Text;
   };
 }
 
@@ -56,7 +56,7 @@ export interface EventoSpEntorno extends Struct.ComponentSchema {
     icon: 'apps';
   };
   attributes: {
-    nombre: Schema.Attribute.String;
+    nombre: Schema.Attribute.Text;
   };
 }
 
@@ -81,16 +81,16 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
   attributes: {
     descripcion: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 400;
+        maxLength: 2000;
       }>;
     ejes_estrategicos: Schema.Attribute.Component<
       'evento-sp.eje-estrategico',
       true
     >;
-    equipo: Schema.Attribute.String;
+    equipo: Schema.Attribute.Text;
     indicador_evento: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 400;
+        maxLength: 2000;
       }>;
     lineas_operativa: Schema.Attribute.Component<
       'evento-sp.linea-operativa',
@@ -110,7 +110,7 @@ export interface EventoSpEvento extends Struct.ComponentSchema {
       }>;
     perfiles_profesional: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 300;
+        maxLength: 2000;
       }>;
     productos: Schema.Attribute.Component<'evento-sp.producto', true> &
       Schema.Attribute.Required;
@@ -134,10 +134,10 @@ export interface EventoSpIndicador extends Struct.ComponentSchema {
   };
   attributes: {
     cantidad: Schema.Attribute.Integer;
-    indicador_linea_base: Schema.Attribute.String;
+    indicador_linea_base: Schema.Attribute.Text;
     meta_producto: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 400;
+        maxLength: 2000;
       }>;
   };
 }
@@ -149,7 +149,7 @@ export interface EventoSpLineaOperativa extends Struct.ComponentSchema {
     icon: 'collapse';
   };
   attributes: {
-    nombre: Schema.Attribute.String;
+    nombre: Schema.Attribute.Text;
   };
 }
 
@@ -194,7 +194,7 @@ export interface EventoSpPoblacionSujeto extends Struct.ComponentSchema {
     icon: 'eye';
   };
   attributes: {
-    nombre: Schema.Attribute.String;
+    nombre: Schema.Attribute.Text;
   };
 }
 
@@ -209,7 +209,7 @@ export interface EventoSpProducto extends Struct.ComponentSchema {
     actividades: Schema.Attribute.Component<'evento-sp.actividad', true>;
     descripcion: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 600;
+        maxLength: 2000;
       }>;
     indicadores: Schema.Attribute.Component<'evento-sp.indicador', true>;
   };
@@ -237,7 +237,7 @@ export interface EventoSpSoporte extends Struct.ComponentSchema {
   attributes: {
     cantidad: Schema.Attribute.Integer;
     descripcion: Schema.Attribute.Text;
-    tipo: Schema.Attribute.String;
+    tipo: Schema.Attribute.Text;
     uuid: Schema.Attribute.String;
   };
 }
@@ -249,7 +249,7 @@ export interface EventoSpTecnologia extends Struct.ComponentSchema {
     icon: 'cloud';
   };
   attributes: {
-    nombre: Schema.Attribute.String;
+    nombre: Schema.Attribute.Text;
   };
 }
 

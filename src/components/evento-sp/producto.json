@@ -9,17 +9,17 @@
   "attributes": {
     "actividades": {
       "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.actividad"
+      "component": "evento-sp.actividad",
+      "repeatable": true
     },
     "descripcion": {
       "type": "text",
-      "maxLength": 600
+      "maxLength": 2000
     },
     "indicadores": {
       "type": "component",
-      "repeatable": true,
-      "component": "evento-sp.indicador"
+      "component": "evento-sp.indicador",
+      "repeatable": true
     }
   }
 }

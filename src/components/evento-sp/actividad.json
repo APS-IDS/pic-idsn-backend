@@ -12,7 +12,7 @@
       "maxLength": 2000
     },
     "cantidad_a_ejecutar": {
-      "type": "string"
+      "type": "text"
     },
     "entornos": {
       "type": "component",
@@ -30,7 +30,7 @@
       "repeatable": true
     },
     "unidad_medida": {
-      "type": "string"
+      "type": "text"
     },
     "cups": {
       "type": "component",

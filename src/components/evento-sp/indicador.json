@@ -9,10 +9,10 @@
   "attributes": {
     "meta_producto": {
       "type": "text",
-      "maxLength": 400
+      "maxLength": 2000
     },
     "indicador_linea_base": {
-      "type": "string"
+      "type": "text"
     },
     "cantidad": {
       "type": "integer"
