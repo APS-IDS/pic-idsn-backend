@@ -9,8 +9,11 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
   };
   attributes: {
     cantidad_a_ejecutar: Schema.Attribute.Text;
+    costos_directos: Schema.Attribute.Decimal;
+    costos_indirectos: Schema.Attribute.Decimal;
     cronograma: Schema.Attribute.JSON;
     cups: Schema.Attribute.Component<'evento-sp.cups', false>;
+    curso_de_vida: Schema.Attribute.String;
     descripcion: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 2000;
@@ -212,6 +215,7 @@ export interface EventoSpProducto extends Struct.ComponentSchema {
         maxLength: 2000;
       }>;
     indicadores: Schema.Attribute.Component<'evento-sp.indicador', true>;
+    problematica_priorizada: Schema.Attribute.Text;
   };
 }
 
@@ -270,6 +274,7 @@ export interface EventoSpTerritorializacion extends Struct.ComponentSchema {
       'api::municipio.municipio'
     >;
     numero_hogares: Schema.Attribute.Integer;
+    numero_pobalcion_intervenir: Schema.Attribute.Integer;
     territorio: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 600;

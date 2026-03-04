@@ -20,6 +20,9 @@
       "type": "component",
       "component": "evento-sp.indicador",
       "repeatable": true
+    },
+    "problematica_priorizada": {
+      "type": "text"
     }
   }
 }

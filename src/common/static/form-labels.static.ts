@@ -228,4 +228,12 @@ export const FORM_LABELS = {
     "I30303 CARACTERIZACIÓN DEL ENTORNO EDUCATIVO",
     "I30304 CARACTERIZACIÓN DEL ENTORNO COMUNITARIO",
   ],
+  curso_de_vida:[
+    'Primera infancia',
+    'Infancia',
+    'Adolescencia',
+    'Juventud',
+    'Adultez',
+    'Vejez'
+  ]
 };

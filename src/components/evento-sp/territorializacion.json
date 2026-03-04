@@ -22,6 +22,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::municipio.municipio"
+    },
+    "numero_pobalcion_intervenir": {
+      "type": "integer"
     }
   }
 }
