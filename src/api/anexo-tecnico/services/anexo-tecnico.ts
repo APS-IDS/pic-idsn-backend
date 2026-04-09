@@ -264,12 +264,15 @@ export default factories.createCoreService(
     ) {
       const result: Record<string, number> = {};
 
+      console.log("------------------ Computing soportes estado with seguimientoMap:", anexosTecnicos);
+
       for (const anexo of anexosTecnicos) {
         for (const evento of anexo.eventos || []) {
           for (const producto of evento.productos || []) {
             for (const actividad of producto.actividades || []) {
               for (const soporte of actividad.soportes || []) {
                 const key = `${anexo.documentId}_${soporte.uuid}`;
+                console.log("------------------ Processing soporte:", key);
                 const seguimiento = seguimientoMap.get(key);
                 const estadoNombre =
                   seguimiento?.estado_soporte?.estado_soporte;
@@ -281,6 +284,8 @@ export default factories.createCoreService(
           }
         }
       }
+
+      console.log("------------------ Computed soportes estado result:", result);
 
       return { result };
     },
@@ -329,7 +334,7 @@ export default factories.createCoreService(
           [
             this.fetchAllAnexosTecnicos(),
             strapi.documents("api::seguimiento.seguimiento").findMany({
-              pageSize: 10000,
+              pageSize: 1000,
               page: 1,
               populate: {
                 estado_soporte: true,
@@ -337,7 +342,7 @@ export default factories.createCoreService(
               },
             }),
             strapi.documents("api::observacione.observacione").findMany({
-              pageSize: 10000,
+              pageSize: 1000,
               page: 1,
               populate: {
                 estado_referente: true,
@@ -355,6 +360,8 @@ export default factories.createCoreService(
             seguimientoMap.set(key, seg);
           }
         }
+
+        console.log("------------------ Loaded seguimientos:", seguimientoMap);
 
         const observacionMap = new Map<string, any>();
         for (const obs of observaciones) {
