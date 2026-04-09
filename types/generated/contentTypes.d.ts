@@ -540,6 +540,9 @@ export interface ApiEvidenciaEvidencia extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    evidencia_link: Schema.Attribute.String;
+    evidencia_type: Schema.Attribute.Enumeration<['link', 'file']> &
+      Schema.Attribute.DefaultTo<'file'>;
     file_name: Schema.Attribute.String;
     file_string: Schema.Attribute.Text & Schema.Attribute.Private;
     fileMimeType: Schema.Attribute.String;

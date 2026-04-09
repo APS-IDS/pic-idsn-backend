@@ -59,6 +59,69 @@ export default factories.createCoreService(
       }
     },
 
+    async uploadLink({
+      anexo_id,
+      soporte_id,
+      municipio_id,
+      file_name,
+      evidencia_link,
+      user,
+      ctx,
+    }: {
+      anexo_id: string;
+      soporte_id: string;
+      municipio_id: string;
+      file_name: string;
+      evidencia_link: string;
+      user: any;
+      ctx: Context;
+    }) {
+      try {
+        const anexo = await this.findAnexo(anexo_id, soporte_id);
+
+        if (!anexo) {
+          return ctx.notFound("Anexo or soporte no encontrado");
+        }
+
+        if (!file_name || !evidencia_link) {
+          return ctx.badRequest("file_name and evidencia_link are required");
+        }
+
+        const municipio = await this.findMunicipio(municipio_id);
+
+        if (!municipio) {
+          return ctx.badRequest("Municipio no encontrado");
+        }
+
+        const evidencia = await strapi
+          .documents("api::evidencia.evidencia")
+          .create({
+            data: {
+              municipio: { documentId: municipio_id },
+              file_name,
+              evidencia_type: "link",
+              evidencia_link,
+            },
+          });
+
+        const seguimiento = await this.findSeguimiento(anexo_id, soporte_id);
+
+        if (seguimiento) {
+          return await this.updateSeguimiento(seguimiento, evidencia);
+        }
+
+        return await this.createSeguimiento(
+          anexo_id,
+          soporte_id,
+          user,
+          evidencia
+        );
+      } catch (error) {
+        strapi.log.error("Error uploading link:", error);
+        return ctx.internalServerError(error.message);
+      }
+    },
+
     async getFile({ evidenciaId, ctx }: { evidenciaId: string; ctx: Context }) {
       const evidencia = await strapi
         .documents("api::evidencia.evidencia")
@@ -176,6 +239,7 @@ export default factories.createCoreService(
           file_string: base64Data,
           file_name: files.originalFilename,
           fileMimeType: files.mimetype,
+          evidencia_type: "file",
         },
       });
     },

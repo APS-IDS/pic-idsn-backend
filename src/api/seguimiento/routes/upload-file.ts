@@ -20,5 +20,10 @@ export default {
       path: "/seguimiento/get-file/:id",
       handler: "seguimiento.getFile",
     },
+    {
+      method: "POST",
+      path: "/seguimiento/upload-link",
+      handler: "seguimiento.uploadLink",
+    },
   ],
 };

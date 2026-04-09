@@ -35,6 +35,17 @@
     },
     "fileMimeType": {
       "type": "string"
+    },
+    "evidencia_type": {
+      "type": "enumeration",
+      "default": "file",
+      "enum": [
+        "link",
+        "file"
+      ]
+    },
+    "evidencia_link": {
+      "type": "string"
     }
   }
 }

@@ -61,6 +61,26 @@ export default factories.createCoreController(
       const sanitizedResults = await this.sanitizeOutput(result, ctx);
       return sanitizedResults;
     },
+    async uploadLink(ctx: Context) {
+      const user = ctx.state.user;
+      const { anexo_id, soporte_id, municipio_id, file_name, evidencia_link } =
+        ctx.request.body;
+
+      const result = await strapi
+        .service("api::seguimiento.seguimiento")
+        .uploadLink({
+          anexo_id,
+          soporte_id,
+          municipio_id,
+          file_name,
+          evidencia_link,
+          user,
+          ctx,
+        });
+
+      const sanitizedResults = await this.sanitizeOutput(result, ctx);
+      return sanitizedResults;
+    },
     async removeFile(ctx: Context) {
       const { anexo_id, soporte_id, evidencia_id } = ctx.request.body;
 
