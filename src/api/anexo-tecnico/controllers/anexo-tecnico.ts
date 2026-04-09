@@ -4,10 +4,50 @@
 
 import { factories } from "@strapi/strapi";
 import { FORM_LABELS } from "../../../common/static/form-labels.static";
+import { CustomRoles } from "../../../../database/seeders/09-customRoles";
 
 export default factories.createCoreController(
   "api::anexo-tecnico.anexo-tecnico",
   ({ strapi }) => ({
+    async find(ctx) {
+      const user = ctx.state.user;
+
+      if (user) {
+        const fullUser = await strapi.db
+          .query("plugin::users-permissions.user")
+          .findOne({
+            where: { id: user.id },
+            populate: ["custom_roles", "operador_pic"],
+          });
+
+
+        const isOperador = fullUser?.custom_roles?.some(
+          (role) => role.name === CustomRoles.OPERADOR
+        );
+
+        if (isOperador && fullUser.operador_pic) {
+          ctx.query = {
+            ...ctx.query,
+            filters: {
+              ...(ctx.query.filters as object || {}),
+              eventos: {
+                operador_pic: {
+                  documentId: fullUser.operador_pic.documentId,
+                },
+              },
+            },
+          };
+        }
+      }
+
+      const sanitizedQueryParams = await this.sanitizeQuery(ctx);
+      const { results, pagination } = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .find(sanitizedQueryParams);
+      const sanitizedResults = await this.sanitizeOutput(results, ctx);
+      return this.transformResponse(sanitizedResults, { pagination });
+    },
+
     async labels(ctx) {
       return FORM_LABELS;
     },
