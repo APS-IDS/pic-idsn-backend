@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_evento_sp_curso_de_vidas",
+  "info": {
+    "displayName": "curso de vida",
+    "icon": "arrowLeft"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -13,7 +13,7 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     costos_indirectos: Schema.Attribute.Decimal;
     cronograma: Schema.Attribute.JSON;
     cups: Schema.Attribute.Component<'evento-sp.cups', false>;
-    curso_de_vida: Schema.Attribute.String;
+    curso_de_vida: Schema.Attribute.Component<'evento-sp.curso-de-vida', true>;
     descripcion: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 2000;
@@ -38,6 +38,17 @@ export interface EventoSpCups extends Struct.ComponentSchema {
   };
   attributes: {
     codigo: Schema.Attribute.String;
+  };
+}
+
+export interface EventoSpCursoDeVida extends Struct.ComponentSchema {
+  collectionName: 'components_evento_sp_curso_de_vidas';
+  info: {
+    displayName: 'curso de vida';
+    icon: 'arrowLeft';
+  };
+  attributes: {
+    nombre: Schema.Attribute.String;
   };
 }
 
@@ -298,6 +309,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'evento-sp.actividad': EventoSpActividad;
       'evento-sp.cups': EventoSpCups;
+      'evento-sp.curso-de-vida': EventoSpCursoDeVida;
       'evento-sp.eje-estrategico': EventoSpEjeEstrategico;
       'evento-sp.entorno': EventoSpEntorno;
       'evento-sp.equipo': EventoSpEquipo;

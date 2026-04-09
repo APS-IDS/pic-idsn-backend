@@ -54,14 +54,16 @@
     "uuid": {
       "type": "string"
     },
-    "curso_de_vida": {
-      "type": "string"
-    },
     "costos_directos": {
       "type": "decimal"
     },
     "costos_indirectos": {
       "type": "decimal"
+    },
+    "curso_de_vida": {
+      "type": "component",
+      "component": "evento-sp.curso-de-vida",
+      "repeatable": true
     }
   }
 }
