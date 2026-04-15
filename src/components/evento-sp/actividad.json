@@ -8,8 +8,7 @@
   "options": {},
   "attributes": {
     "descripcion": {
-      "type": "text",
-      "maxLength": 2000
+      "type": "text"
     },
     "cantidad_a_ejecutar": {
       "type": "text"

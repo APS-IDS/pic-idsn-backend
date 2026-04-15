@@ -14,10 +14,7 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
     cronograma: Schema.Attribute.JSON;
     cups: Schema.Attribute.Component<'evento-sp.cups', false>;
     curso_de_vida: Schema.Attribute.Component<'evento-sp.curso-de-vida', true>;
-    descripcion: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 2000;
-      }>;
+    descripcion: Schema.Attribute.Text;
     entornos: Schema.Attribute.Component<'evento-sp.entorno', true>;
     poblaciones: Schema.Attribute.Component<'evento-sp.poblacion-sujeto', true>;
     soportes: Schema.Attribute.Component<'evento-sp.soporte', true>;
