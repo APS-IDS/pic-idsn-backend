@@ -48,6 +48,6 @@ export default {
     } catch (err) {
       console.error("Failed to set up logger:", err);
     }
-    await runSeeders(strapi);
+    // await runSeeders(strapi);
   },
 };
