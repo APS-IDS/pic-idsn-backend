@@ -9,8 +9,8 @@ export interface EventoSpActividad extends Struct.ComponentSchema {
   };
   attributes: {
     cantidad_a_ejecutar: Schema.Attribute.Text;
-    costos_directos: Schema.Attribute.Decimal;
-    costos_indirectos: Schema.Attribute.Decimal;
+    costos_directos: Schema.Attribute.Float;
+    costos_indirectos: Schema.Attribute.Float;
     cronograma: Schema.Attribute.JSON;
     cups: Schema.Attribute.Component<'evento-sp.cups', false>;
     curso_de_vida: Schema.Attribute.Component<'evento-sp.curso-de-vida', true>;

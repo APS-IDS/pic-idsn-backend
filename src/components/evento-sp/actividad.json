@@ -54,10 +54,10 @@
       "type": "string"
     },
     "costos_directos": {
-      "type": "decimal"
+      "type": "float"
     },
     "costos_indirectos": {
-      "type": "decimal"
+      "type": "float"
     },
     "curso_de_vida": {
       "type": "component",
