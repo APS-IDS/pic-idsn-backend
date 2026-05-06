@@ -166,6 +166,31 @@ export default factories.createCoreService(
     },
 
     /**
+     * Computes eventos-proyecto from pre-fetched data.
+     */
+    computeEventosProyecto(anexosTecnicos: any[]) {
+      const proyectoEventosMap = new Map<string, number>();
+
+      for (const anexo of anexosTecnicos) {
+        for (const evento of anexo.eventos || []) {
+          const proyectoName = evento.proyectos_idsn?.proyecto;
+          if (!proyectoName) continue;
+
+          proyectoEventosMap.set(
+            proyectoName,
+            (proyectoEventosMap.get(proyectoName) || 0) + 1
+          );
+        }
+      }
+
+      const result = Array.from(proyectoEventosMap.entries())
+        .map(([proyecto, eventos]) => ({ proyecto, eventos }))
+        .sort((a, b) => b.eventos - a.eventos);
+
+      return { result };
+    },
+
+    /**
      * Computes eventos-operador from pre-fetched data.
      */
     computeEventosOperador(anexosTecnicos: any[]) {
@@ -466,6 +491,16 @@ export default factories.createCoreService(
       } catch (error) {
         strapi.log.error("Error fetching eventos operador por anio:", error);
         throw new Error("Error fetching eventos operador por anio");
+      }
+    },
+
+    async eventosProyectoPorAnio(year: number) {
+      try {
+        const anexosTecnicos = await this.fetchAllAnexosTecnicosByYear(year);
+        return this.computeEventosProyecto(anexosTecnicos);
+      } catch (error) {
+        strapi.log.error("Error fetching eventos proyecto por anio:", error);
+        throw new Error("Error fetching eventos proyecto por anio");
       }
     },
 

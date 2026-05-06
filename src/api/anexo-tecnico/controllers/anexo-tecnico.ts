@@ -90,6 +90,23 @@ export default factories.createCoreController(
 
       return result;
     },
+    async eventosProyectoPorAnio(ctx) {
+      const rawYearParam = Array.isArray(ctx.query.year)
+        ? ctx.query.year[0]
+        : ctx.query.year;
+      const yearParam = String(rawYearParam ?? "2025");
+      const yearString = /^\d{4}-\d{2}-\d{2}$/.test(yearParam)
+        ? yearParam.slice(0, 4)
+        : yearParam;
+      let year = Number.parseInt(yearString, 10);
+      if (Number.isNaN(year)) year = 2025;
+
+      const result = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .eventosProyectoPorAnio(year);
+
+      return result;
+    },
     async actividadesTecnologia(ctx) {
       const result = await strapi
         .service("api::anexo-tecnico.anexo-tecnico")
