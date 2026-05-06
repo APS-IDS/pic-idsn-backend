@@ -17,6 +17,11 @@ export default {
     },
     {
       method: "GET",
+      path: "/eventos-operador-por-anio",
+      handler: "anexo-tecnico.eventosOperadorPorAnio",
+    },
+    {
+      method: "GET",
       path: "/actividades-tecnologia",
       handler: "anexo-tecnico.actividadesTecnologia",
     },

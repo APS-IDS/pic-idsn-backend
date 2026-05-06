@@ -79,6 +79,39 @@ export default factories.createCoreService(
     },
 
     /**
+     * Fetches all anexo-tecnicos for a given year with the full dashboard populate.
+     */
+    async fetchAllAnexosTecnicosByYear(year: number) {
+      const allResults: any[] = [];
+      let start = 0;
+      const limit = 2;
+      const startDate = `${year}-01-01`;
+      const endDate = `${year}-12-31`;
+
+      while (true) {
+        const batch = await strapi
+          .documents("api::anexo-tecnico.anexo-tecnico")
+          .findMany({
+            start,
+            limit,
+            populate: FULL_DASHBOARD_POPULATE,
+            filters: {
+              anexo_tecnico_date: {
+                $between: [startDate, endDate],
+              },
+            },
+          });
+
+        allResults.push(...batch);
+
+        if (batch.length === 0 || batch.length < limit) break;
+        start += limit;
+      }
+
+      return allResults;
+    },
+
+    /**
      * Computes municipios-eventos from pre-fetched data.
      */
     computeMunicipiosEventos(anexosTecnicos: any[]) {
@@ -423,6 +456,16 @@ export default factories.createCoreService(
       } catch (error) {
         strapi.log.error("Error fetching eventos operador:", error);
         throw new Error("Error fetching eventos operador");
+      }
+    },
+
+    async eventosOperadorPorAnio(year: number) {
+      try {
+        const anexosTecnicos = await this.fetchAllAnexosTecnicosByYear(year);
+        return this.computeEventosOperador(anexosTecnicos);
+      } catch (error) {
+        strapi.log.error("Error fetching eventos operador por anio:", error);
+        throw new Error("Error fetching eventos operador por anio");
       }
     },
 
