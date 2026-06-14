@@ -156,5 +156,12 @@ export default factories.createCoreController(
 
       return result;
     },
+    async auditSoportesSinUuid(ctx) {
+      const result = await strapi
+        .service("api::anexo-tecnico.anexo-tecnico")
+        .auditSoportesSinUuid();
+
+      return result;
+    },
   })
 );

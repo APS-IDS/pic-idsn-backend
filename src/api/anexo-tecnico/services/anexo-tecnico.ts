@@ -604,5 +604,59 @@ export default factories.createCoreService(
         throw new Error("Error fetching actividades por estado");
       }
     },
+
+    /**
+     * Audit helper: finds anexos tecnicos that contain at least one soporte
+     * (or actividad) without a uuid. Components can't be filtered from the
+     * admin panel, so this walks the fully-populated tree in JS to guarantee
+     * correctness.
+     */
+    async auditSoportesSinUuid() {
+      try {
+        const anexosTecnicos = await this.fetchAllAnexosTecnicos();
+        const offending: any[] = [];
+
+        for (const anexo of anexosTecnicos) {
+          const soportesSinUuid: any[] = [];
+
+          for (const evento of anexo.eventos ?? []) {
+            for (const producto of evento.productos ?? []) {
+              for (const actividad of producto.actividades ?? []) {
+                for (const soporte of actividad.soportes ?? []) {
+                  if (!soporte.uuid) {
+                    soportesSinUuid.push({
+                      eventoId: evento.id,
+                      productoId: producto.id,
+                      actividadId: actividad.id,
+                      actividadUuid: actividad.uuid ?? null,
+                      soporteId: soporte.id,
+                      tipo: soporte.tipo ?? null,
+                      descripcion: soporte.descripcion ?? null,
+                    });
+                  }
+                }
+              }
+            }
+          }
+
+          if (soportesSinUuid.length > 0) {
+            offending.push({
+              documentId: anexo.documentId,
+              anexo_tecnico_date: anexo.anexo_tecnico_date ?? null,
+              count: soportesSinUuid.length,
+              soportes: soportesSinUuid,
+            });
+          }
+        }
+
+        return {
+          total: offending.length,
+          results: offending,
+        };
+      } catch (error) {
+        strapi.log.error("Error auditing soportes sin uuid:", error);
+        throw new Error("Error auditing soportes sin uuid");
+      }
+    },
   })
 );

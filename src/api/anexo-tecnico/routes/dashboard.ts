@@ -60,5 +60,10 @@ export default {
       path: "/actividades-por-estado",
       handler: "anexo-tecnico.actividadesPorEstado",
     },
+    {
+      method: "GET",
+      path: "/audit/soportes-sin-uuid",
+      handler: "anexo-tecnico.auditSoportesSinUuid",
+    },
   ],
 };
