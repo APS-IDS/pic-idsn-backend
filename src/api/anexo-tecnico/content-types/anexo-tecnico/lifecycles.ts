@@ -76,7 +76,7 @@ const getNewAnexoTecnico = (anexoTecnico: AnexoTecnicoI) => {
                 const { uuid: actividadUUID, shouldUpdate } = getUUID(
                   actividad.uuid
                 );
-                shouldUpdateResult = shouldUpdate;
+                shouldUpdateResult = shouldUpdateResult || shouldUpdate;
                 return {
                   ...actividad,
                   uuid: actividadUUID,
@@ -84,7 +84,7 @@ const getNewAnexoTecnico = (anexoTecnico: AnexoTecnicoI) => {
                     const { uuid: soporteUUID, shouldUpdate } = getUUID(
                       soporte.uuid
                     );
-                    shouldUpdateResult = shouldUpdate;
+                    shouldUpdateResult = shouldUpdateResult || shouldUpdate;
                     return {
                       ...soporte,
                       uuid: soporteUUID,
